@@ -19,10 +19,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import tabla.EstiloTablaHeader;
-import tabla.EstiloTablaRenderer;
-import tabla.MyScrollbarUI;
 import Controlador.Numero_a_Letra;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
@@ -30,14 +26,10 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
-import java.awt.Frame;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,6 +37,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static ventas.ListarBoletos.buscar;
 public class ModalCorteDia extends javax.swing.JDialog {
     Numero_a_Letra nl=new Numero_a_Letra();
     /*BOLETO*/
@@ -546,10 +539,8 @@ public class ModalCorteDia extends javax.swing.JDialog {
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         if(!"".equals(lblpasajero.getText()) && !"".equals(lblorigen.getText())&& !"".equals(lbldestino.getText())&& !"".equals(lblhora_partida.getText())&& !"".equals(lbldni.getText())&&!"".equals(lblvalor_venta.getText())){
             if (this.registrar.getText().equals("MODIFICAR")){
-                guardar_modificar_boleto();
-                guardar_cliente_boleto();
-                
-                blctd.listarBoletos("");
+                guardar_modificar_boleto();        
+                blctd.listarBoletos(buscar.getText());
                 SuccessAlert sa = new SuccessAlert(new JFrame(), true);
                     sa.titulo.setText("¡HECHO!");
                     sa.msj.setText("SE HA MODIFICADO");
@@ -818,7 +809,7 @@ public class ModalCorteDia extends javax.swing.JDialog {
                 float[] ColumnaFila0=new float[]{100f};
                 fila0.setWidths(ColumnaFila0);
                 fila0.setHorizontalAlignment(Element.ALIGN_CENTER);
-                fila0.addCell("IMPORTANTE: Todo pasajeto debe estar una hora antes de la partida.\n"
+                fila0.addCell("IMPORTANTE: Todo pasajero debe estar una hora antes de la partida.\n"
                         + "* Recibo con cargo a regularizar en la agencía.(USUARIO)");
                 doc.add(fila0);
 

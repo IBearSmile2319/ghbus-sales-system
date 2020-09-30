@@ -18,11 +18,12 @@ public class Envios {
     private Double precio_unit;
     private Double importe;
     private String clave;
+    private String status;
 
     public Envios() {
     }
 
-    public Envios(int id, String desde, String hacia, String fecha_actual, String remitente, String dni_rem, String celular_rem, String ruc_rem, String beneficiario, String dni_bene, String celular_bene, String direccion_bene, String correo, int cant_enc, String contenido, Double precio_unit, Double importe, String clave) {
+    public Envios(int id, String desde, String hacia, String fecha_actual, String remitente, String dni_rem, String celular_rem, String ruc_rem, String beneficiario, String dni_bene, String celular_bene, String direccion_bene, String correo, int cant_enc, String contenido, Double precio_unit, Double importe, String clave, String status) {
         this.id = id;
         this.desde = desde;
         this.hacia = hacia;
@@ -41,6 +42,7 @@ public class Envios {
         this.precio_unit = precio_unit;
         this.importe = importe;
         this.clave = clave;
+        this.status = status;
     }
 
     public int getId() {
@@ -186,6 +188,15 @@ public class Envios {
     public void setClave(String clave) {
         this.clave = clave;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
 
    
 }

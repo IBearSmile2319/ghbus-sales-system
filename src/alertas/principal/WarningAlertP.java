@@ -9,14 +9,14 @@ import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
-import producto.Opciones;
+import Controlador.EnviosCTD;
 
 /**
  *
  * @author Rojeru San
  */
 public class WarningAlertP extends javax.swing.JDialog {
-
+    EnviosCTD enctd=new EnviosCTD();
     Timer timer = null;
     TimerTask task;
     int i = 32;
@@ -130,9 +130,9 @@ public class WarningAlertP extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        int elimina = Opciones.eliminar(Integer.parseInt(this.id.getText()));
+        int elimina = enctd.eliminar(Integer.parseInt(this.id.getText()));
         if (elimina != 0) {
-            Opciones.listar("");
+            enctd.listar("");
             this.dispose();
             SuccessAlert sa = new SuccessAlert(new JFrame(), true);
             sa.titulo.setText("¡HECHO!");
@@ -183,9 +183,9 @@ public class WarningAlertP extends javax.swing.JDialog {
 
     private void aceptarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_aceptarKeyTyped
         if ((evt.getKeyChar() == KeyEvent.VK_ENTER)) {
-            int elimina = Opciones.eliminar(Integer.parseInt(this.id.getText()));
+            int elimina = enctd.eliminar(Integer.parseInt(this.id.getText()));
             if (elimina != 0) {
-                Opciones.listar("");
+                enctd.listar("");
                 this.dispose();
                 SuccessAlert sa = new SuccessAlert(new JFrame(), true);
                 sa.titulo.setText("¡HECHO!");

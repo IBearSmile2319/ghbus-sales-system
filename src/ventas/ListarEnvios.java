@@ -19,7 +19,27 @@ import Modelo.Envios;
 /*cliente*/
 import Controlador.ClientesCTD;
 import Modelo.Cliente;
+import alertas.principal.SuccessAlert;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Rojeru San
@@ -48,33 +68,52 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
     }
     public void guardar_envio(){
         if(!"".equals(txtDe.getText())||!"".equals(txtA.getText())||!"".equals(txtRemitente.getText())||!"".equals(txtDniRemitente.getText())||!"".equals(txtCelularRemitente.getText())||!"".equals(txtRucRemitente.getText())||!"".equals(txtBeneficiario.getText())||!"".equals(txtDniBeneficiario.getText())||!"".equals(txtCelularBeneficiario.getText())||!"".equals(txtDiceContener.getText())||!"".equals(txtClaveEnvio.getText())){
-            en.setDesde(txtDe.getText());
-            en.setHacia(txtA.getText());
-            en.setRemitente(txtRemitente.getText());
+            en.setDesde(txtDe.getText().toUpperCase());
+            en.setHacia(txtA.getText().toUpperCase());
+            en.setRemitente(txtRemitente.getText().toUpperCase());
             en.setDni_rem(txtDniRemitente.getText());
             en.setCelular_rem(txtCelularRemitente.getText());
             en.setRuc_rem(txtRucRemitente.getText());
-            en.setBeneficiario(txtBeneficiario.getText());
+            en.setBeneficiario(txtBeneficiario.getText().toUpperCase());
             en.setDni_bene(txtDniBeneficiario.getText());
             en.setCelular_bene(txtCelularBeneficiario.getText());
             if(!"".equals(txtDireccionBeneficiario.getText())){
-                en.setDireccion_bene(txtDireccionBeneficiario.getText());
+                en.setDireccion_bene(txtDireccionBeneficiario.getText().toUpperCase());
             }else{
                 en.setDireccion_bene("");
             }
             if(!"".equals(txtCorreoEnvios.getText())){
-                
+                en.setCorreo(txtCorreoEnvios.getText().toUpperCase());
+            }else{
+                en.setCorreo("no tiene".toUpperCase());
             }
-            en.setCorreo(txtCorreoEnvios.getText());
+            
             en.setCant_enc(Integer.parseInt(txtCantidad.getText()));
-            en.setContenido(txtDiceContener.getText());
+            en.setContenido(txtDiceContener.getText().toUpperCase());
             en.setPrecio_unit(Double.parseDouble(txtPrecioUnit.getText()));
-            en.setImporte(Double.parseDouble(txtImporte.getText()));
+            if(!"".equals(txtImporte.getText())){
+                en.setImporte(Double.parseDouble(txtImporte.getText()));
+            }else{
+                
+                en.setImporte(0.00);
+            }
+            
             en.setClave(txtClaveEnvio.getText());
             enctd.Envios_post(en);
-            JOptionPane.showMessageDialog(null, "Envio Registrado!");
+            
+            agregar_tabla_envios();
+            
+            SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+            sa.titulo.setText("¡HECHO!");
+            sa.msj.setText("SE HA AGREGADO UNA");
+            sa.msj1.setText("NUEVA ENCOMIENDA");
+            sa.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(null, "Rellene los campos necesarios!");
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            er.titulo.setText("OOPS...");
+            er.msj.setText("LOS CAMPOS ESTAN VACIOS");
+            er.msj1.setText("");
+            er.setVisible(true);
         }
     }
     public void guardar_cliente_enviorem(){
@@ -87,7 +126,7 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
         cl.setDni(txtDniBeneficiario.getText());
         clctd.Registrar_cliente(cl);
     }
-    public void G_V_cliente_Envio(){
+    public void G_E_cliente_Envio(){
         ClientesCTD cli=new ClientesCTD();
         String dnienviorem=txtDniRemitente.getText();
         String dnienviobene=txtBeneficiario.getText();
@@ -513,6 +552,11 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
         btnImprimir.setToolTipText("<html> <head> <style> #contenedor{background:white;color:black; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Canclar la ventar</h4> </body> </html>");
         btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnImprimir.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -648,7 +692,8 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnRegistrarEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEnvioActionPerformed
-        agregar_tabla_envios();
+        guardar_envio();
+        G_E_cliente_Envio(); 
     }//GEN-LAST:event_btnRegistrarEnvioActionPerformed
 
     private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
@@ -698,6 +743,15 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_txtDniBeneficiarioKeyPressed
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+        sa.titulo.setText("¡HECHO!");
+        sa.msj.setText("SE HA GENERADO LA");
+        sa.msj1.setText("BOLETA DE ENVIO");
+        sa.setVisible(true);
+        pdfEnvios();
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -808,6 +862,143 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "ingrese contenido");
             }
+    }
+    private void pdfEnvios(){
+        try {
+            /**variables esternas*/
+            
+            
+            /*convertir numero a letras*/
+            
+            
+            /*comienzo del pdf*/
+            FileOutputStream archivo;
+            File file=new File("src/pdf/Encomienda.pdf");
+            archivo= new FileOutputStream(file);
+            Document doc= new Document();
+                PdfWriter.getInstance(doc,archivo);
+                doc.open();
+//                Image img= Image.getInstance("/src/imgenes/logo.png");
+                Paragraph fecha= new Paragraph();
+                Font negrita= new Font(Font.FontFamily.TIMES_ROMAN,11,Font.BOLD,BaseColor.BLUE);
+                fecha.add(Chunk.NEWLINE);
+                Date date=new Date();
+                fecha.add("FACTURA:"+" \n"+"FECHA: "+new SimpleDateFormat("d/MM/yyyy").format(date)+"\n\n");
+                PdfPTable Encabezado=new PdfPTable(3);
+                Encabezado.setWidthPercentage(100);
+                Encabezado.getDefaultCell().setBorder(0);
+                float[] ColumnaEncabezado=new float[]{140f,10f,60f};
+                Encabezado.setWidths(ColumnaEncabezado);
+                Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
+//                if(id<=9){
+//                    Encabezado.addCell("RECIBO: N°00\nGHBUS EMPRESA DE TRANSPORTES GRUPO HORNA\nPARA TRANSPORTE DE PASAJEROS.");
+//                }else{
+                    Encabezado.addCell("RECIBO: N°0\nGHBUS EMPRESA DE TRANSPORTES GRUPO HORNA\nPARA TRANSPORTE DE PASAJEROS.");
+//                }
+                
+                Encabezado.addCell("");
+                Encabezado.addCell(fecha);
+                doc.add(Encabezado);
+                /*FIN DE ENCABEZADO*/
+                Paragraph bole=new Paragraph();
+                bole.add(Chunk.NEWLINE);
+                bole.add("\n\n");
+                doc.add(bole);
+                /*-----CUADRO1-------*/
+                PdfPTable fila1=new PdfPTable(2);
+                fila1.setWidthPercentage(100);
+                fila1.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila1=new float[]{120f,80f};
+                fila1.setWidths(ColumnaFila1);
+                fila1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila1.addCell("\nNOMBRE O RAZON SOCIAL:"+"\n\n");
+                fila1.addCell("\nRUC: "+"\n\n");
+                doc.add(fila1);
+                /*-----CUADRO2-------*/
+                PdfPTable fila2=new PdfPTable(2);
+                fila2.setWidthPercentage(100);
+                fila2.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila2=new float[]{120f,80f};
+                fila2.setWidths(ColumnaFila2);
+                fila2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila2.addCell("PASAJERO: ");
+                fila2.addCell("ACIENTO: N°");
+                doc.add(fila2);
+                /*-----CUADRO3-------*/
+                PdfPTable fila3=new PdfPTable(3);
+                fila3.setWidthPercentage(100);
+                fila3.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila3=new float[]{60f,60f,80f};
+                fila3.setWidths(ColumnaFila3);
+                fila3.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila3.addCell("\nORIGEN: "+"\n\n");
+                fila3.addCell("\nDESTINO: "+"\n\n");
+                fila3.addCell("\nFECHA DE EXPEDICION: "+new SimpleDateFormat("dd/MMM").format(date)+"\n\n");
+                doc.add(fila3);
+                /*-----CUADRO4-------*/
+                PdfPTable fila4=new PdfPTable(3);
+                fila4.setWidthPercentage(100);
+                fila4.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila4=new float[]{60f,60f,80f};
+                fila4.setWidths(ColumnaFila4);
+                fila4.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila4.addCell("\nFECHA DE VIAJE: "+"\n\n");
+                fila4.addCell("\nHORA DE PARTIDA: "+"\n\n");
+                fila4.addCell("\nVALIDO EN LA HORA Y FECHA INDICADA"+"\n\n");
+                doc.add(fila4);
+                /*-----CUADRO5-------*/
+                PdfPTable fila5=new PdfPTable(3);
+                fila5.setWidthPercentage(100);
+                fila5.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila5=new float[]{60f,60f,80f};
+                fila5.setWidths(ColumnaFila5);
+                fila5.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila5.addCell("\nDNI: "+"\n\n");
+                fila5.addCell("VALOR DE VENTA: S/.");
+                fila5.addCell("PRECIO TOTAL: S/.");
+                doc.add(fila5);
+                /*-----CUADRO6-------*/
+                PdfPTable fila6=new PdfPTable(2);
+                fila6.setWidthPercentage(100);
+                fila6.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila6=new float[]{60f,140f};
+                fila6.setWidths(ColumnaFila6);
+                fila6.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila6.addCell("CELULAR: ");
+                fila6.addCell("CORREO: ");
+                doc.add(fila6);
+                /*-----CUADRO7-------*/
+                PdfPTable fila7=new PdfPTable(1);
+                fila7.setWidthPercentage(100);
+                fila7.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila7=new float[]{100f};
+                fila7.setWidths(ColumnaFila7);
+                fila7.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila7.addCell("SON: ");
+                doc.add(fila7);
+                /*separador*/
+                Paragraph sepa=new Paragraph();
+                sepa.add(Chunk.NEWLINE);
+                sepa.add("\n\n");
+                doc.add(sepa);
+                PdfPTable fila0=new PdfPTable(1);
+                fila0.setWidthPercentage(100);
+                fila0.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila0=new float[]{100f};
+                fila0.setWidths(ColumnaFila0);
+                fila0.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila0.addCell("IMPORTANTE: Todo pasajeto debe estar una hora antes de la partida.\n"
+                        + "* Recibo con cargo a regularizar en la agencía.(USUARIO)");
+                doc.add(fila0);
+
+                doc.close();
+                archivo.close();
+                Desktop.getDesktop().open(file);
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(ModalCorteDia.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ModalCorteDia.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

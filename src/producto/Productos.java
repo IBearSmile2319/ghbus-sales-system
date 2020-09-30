@@ -5,6 +5,7 @@
  */
 package producto;
 
+import Controlador.EnviosCTD;
 import alertas.principal.ErrorAlert;
 import alertas.principal.WarningAlertP;
 import alertas.principal.WarningAlertP1;
@@ -19,7 +20,7 @@ import tabla.MyScrollbarUI;
  * @author Rojeru San
  */
 public class Productos extends javax.swing.JInternalFrame {
-
+    EnviosCTD enctd=new EnviosCTD();
     public Productos() {
         initComponents();
         this.tabla.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
@@ -30,7 +31,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
 
-        Opciones.listar("");
+        enctd.listar("");
     }
 
     public static void seleccionaFila(String id) {
@@ -126,18 +127,18 @@ public class Productos extends javax.swing.JInternalFrame {
         jPanel7.setBackground(new java.awt.Color(58, 159, 171));
 
         tabla.setBackground(new java.awt.Color(204, 204, 204));
-        tabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tabla.setFont(new java.awt.Font("Tahoma", 1, 9)); // NOI18N
         tabla.setForeground(new java.awt.Color(255, 255, 255));
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CÓDIGO", "NOMBRE", "DESCRIPCIÓN", "TIPO PRODUCTO", "$PRECIO", "STOCK"
+                "COD", "DESDE", "HACIA", "REMITENTE", "DNI. REM", "CELULAR. REM", "BENEFICIARIO. REM", "DNI. BENE", "CELULAR. BENE", "DIRECCION", "CORREO", "CANT.", "CONTENIDO", "PRECIO", "IMPORTE", "CLAVE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -151,8 +152,6 @@ public class Productos extends javax.swing.JInternalFrame {
         tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabla);
         if (tabla.getColumnModel().getColumnCount() > 0) {
-            tabla.getColumnModel().getColumn(0).setMinWidth(100);
-            tabla.getColumnModel().getColumn(0).setMaxWidth(100);
             tabla.getColumnModel().getColumn(5).setMinWidth(100);
             tabla.getColumnModel().getColumn(5).setMaxWidth(100);
         }
@@ -191,7 +190,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
         modificar.setBackground(new java.awt.Color(58, 159, 171));
         modificar.setForeground(new java.awt.Color(255, 255, 255));
-        modificar.setText("MODIFICAR");
+        modificar.setText("IMPRIMIR");
         modificar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         modificar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -224,7 +223,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
         nuevo.setBackground(new java.awt.Color(58, 159, 171));
         nuevo.setForeground(new java.awt.Color(255, 255, 255));
-        nuevo.setText("NUEVO PRODUCTO");
+        nuevo.setText("SACAR PORCENTAJE");
         nuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         nuevo.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
         nuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -332,35 +331,7 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        if (this.tabla.getRowCount() < 1) {
-            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("LA TABLA ESTA VACÍA");
-            er.msj1.setText("");
-            er.setVisible(true);
-        } else {
-            if (this.tabla.getSelectedRowCount() < 1) {
-                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("SELECCIONA UN");
-                er.msj1.setText("REGISTRO");
-                er.setVisible(true);
-            } else {
-
-                int fila = this.tabla.getSelectedRow();
-
-                ModalProductoM mp = new ModalProductoM(new JFrame(), true);
-                mp.id.setText(this.tabla.getValueAt(fila, 0).toString());
-                mp.nombre.setText(this.tabla.getValueAt(fila, 1).toString());
-                mp.descripcion.setText(this.tabla.getValueAt(fila, 2).toString());
-                mp.tipo.setSelectedItem(this.tabla.getValueAt(fila, 3).toString());
-                mp.precio.setText(this.tabla.getValueAt(fila, 4).toString());
-                mp.stock.setText(this.tabla.getValueAt(fila, 5).toString());
-                mp.titulo.setText("MODIFICAR");
-                mp.registrar.setText("GUARDAR");
-                mp.setVisible(true);
-            }
-        }
+        
     }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -390,7 +361,7 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
-        Opciones.listar(this.buscar.getText());
+        enctd.listar(this.buscar.getText());
     }//GEN-LAST:event_buscarKeyReleased
 
     private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped

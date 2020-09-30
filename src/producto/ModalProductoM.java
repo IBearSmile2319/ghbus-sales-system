@@ -46,7 +46,6 @@ public class ModalProductoM extends javax.swing.JDialog {
         this.tipo.setSelectedIndex(0);
         this.precio.setText("");
 
-        Opciones.listar("");
     }
 
     /**
@@ -311,83 +310,7 @@ public class ModalProductoM extends javax.swing.JDialog {
     }//GEN-LAST:event_precioKeyTyped
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        if (this.nombre.getText().equals("") || this.descripcion.getText().equals("")
-                || this.tipo.getSelectedIndex() == 0 || this.precio.getText().equals("")) {
-
-            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("FALTAN CAMPOS DE LLENAR");
-            er.msj1.setText("");
-            er.setVisible(true);
-
-        } else {
-
-            if (this.registrar.getText().equals("GUARDAR")) {
-
-                producto.Sentencias s = new Sentencias();
-
-                s.setNombre(this.nombre.getText());
-                s.setDescripcion(this.descripcion.getText());
-                s.setTipo(this.tipo.getSelectedItem().toString());
-                s.setPrecio(Double.parseDouble(this.precio.getText()));
-                s.setId(Integer.parseInt(this.id.getText()));
-
-                int validaStock = 0;
-                if (!this.stock.getText().equals("")) {
-                    validaStock = Integer.parseInt(this.stock.getText());
-                    s.setStock(String.valueOf(validaStock));
-                } else {
-
-//                if (this.tipo.getSelectedIndex() == 2) {
-//                    s.setStock(String.valueOf(validaStock));
-//                } else {
-                    s.setStock("");
-//                }
-                }
-                int opcion = producto.Opciones.actualizar(s);
-                if (opcion != 0) {
-                    String fila = this.id.getText();
-                    Opciones.listar("");
-                    Productos.seleccionaFila(fila);
-                    SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                    sa.titulo.setText("¡HECHO!");
-                    sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-                    sa.msj1.setText("");
-                    sa.setVisible(true);
-                }
-
-            } else {
-
-                producto.Sentencias s = new Sentencias();
-
-                s.setNombre(this.nombre.getText());
-                s.setDescripcion(this.descripcion.getText());
-                s.setTipo(this.tipo.getSelectedItem().toString());
-                s.setPrecio(Double.parseDouble(this.precio.getText()));
-
-                int validaStock = 0;
-                if (!this.stock.getText().equals("")) {
-                    validaStock = Integer.parseInt(this.stock.getText());
-                }
-
-                if (this.tipo.getSelectedIndex() == 2) {
-                    s.setStock(String.valueOf(validaStock));
-                } else {
-                    s.setStock("");
-                }
-                int opcion = producto.Opciones.registrar(s);
-                if (opcion != 0) {
-                    String fila = String.valueOf(Opciones.extraerID());
-                    limpiarCampos();
-                    Productos.seleccionaFila(fila);
-                    SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                    sa.titulo.setText("¡HECHO!");
-                    sa.msj.setText("SE HA REGISTRADO UN");
-                    sa.msj1.setText("NUEVO PRODUCTO");
-                    sa.setVisible(true);
-                }
-            }
-        }
+        
     }//GEN-LAST:event_registrarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -409,84 +332,7 @@ public class ModalProductoM extends javax.swing.JDialog {
 
     private void registrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_registrarKeyTyped
         if ((evt.getKeyChar() == KeyEvent.VK_ENTER)) {
-            if (this.nombre.getText().equals("") || this.descripcion.getText().equals("")
-                    || this.tipo.getSelectedIndex() == 0 || this.precio.getText().equals("")) {
-
-                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("FALTAN CAMPOS DE LLENAR");
-                er.msj1.setText("");
-                er.setVisible(true);
-
-            } else {
-
-                if (this.registrar.getText().equals("GUARDAR")) {
-
-                    producto.Sentencias s = new Sentencias();
-
-                    s.setNombre(this.nombre.getText());
-                    s.setDescripcion(this.descripcion.getText());
-                    s.setTipo(this.tipo.getSelectedItem().toString());
-                    s.setPrecio(Double.parseDouble(this.precio.getText()));
-                    s.setId(Integer.parseInt(this.id.getText()));
-
-                    int validaStock = 0;
-                    if (!this.stock.getText().equals("")) {
-                        validaStock = Integer.parseInt(this.stock.getText());
-                        s.setStock(String.valueOf(validaStock));
-                    } else {
-
-//                if (this.tipo.getSelectedIndex() == 2) {
-//                    s.setStock(String.valueOf(validaStock));
-//                } else {
-                        s.setStock("");
-//                }
-                    }
-
-                    int opcion = producto.Opciones.actualizar(s);
-                    if (opcion != 0) {
-                        String fila = this.id.getText();
-                        Opciones.listar("");
-                        Productos.seleccionaFila(fila);
-                        SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                        sa.titulo.setText("¡HECHO!");
-                        sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-                        sa.msj1.setText("");
-                        sa.setVisible(true);
-                    }
-
-                } else {
-
-                    producto.Sentencias s = new Sentencias();
-
-                    s.setNombre(this.nombre.getText());
-                    s.setDescripcion(this.descripcion.getText());
-                    s.setTipo(this.tipo.getSelectedItem().toString());
-                    s.setPrecio(Double.parseDouble(this.precio.getText()));
-
-                    int validaStock = 0;
-                    if (!this.stock.getText().equals("")) {
-                        validaStock = Integer.parseInt(this.stock.getText());
-                    }
-
-                    if (this.tipo.getSelectedIndex() == 2) {
-                        s.setStock(String.valueOf(validaStock));
-                    } else {
-                        s.setStock("");
-                    }
-                    int opcion = producto.Opciones.registrar(s);
-                    if (opcion != 0) {
-                        String fila = String.valueOf(Opciones.extraerID());
-                        limpiarCampos();
-                        Productos.seleccionaFila(fila);
-                        SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-                        sa.titulo.setText("¡HECHO!");
-                        sa.msj.setText("SE HA REGISTRADO UN");
-                        sa.msj1.setText("NUEVO PRODUCTO");
-                        sa.setVisible(true);
-                    }
-                }
-            }
+            
         }
     }//GEN-LAST:event_registrarKeyTyped
 
