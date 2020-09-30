@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import ventas.ListarBoletos;
 import ventas.ListarEnvios;
+import producto.Productos;
 
 /**
  *
@@ -22,6 +23,7 @@ import ventas.ListarEnvios;
 public class Principal extends javax.swing.JFrame {
     public static ListarEnvios Envios = null;
     public static ListarBoletos Boletos=null;
+    public static Productos product=null;
     
     boolean b = true;
     private boolean minimiza = false;
@@ -388,11 +390,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
-        ErrorAlert er = new ErrorAlert(new JFrame(), true);
-        er.titulo.setText("OOPS...");
-        er.msj.setText("ACCESO RESTRINGIDO");
-        er.msj1.setText("");
-        er.setVisible(true);
+        if (estacerrado(product)) {
+            product = new Productos();
+            int width = escritorio.getWidth();
+            int Height = escritorio.getHeight();
+            product.setSize(width, Height);
+            escritorio.add(product);
+            product.show();
+        }
     }//GEN-LAST:event_btnProductosActionPerformed
 
     private void btnGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGastosActionPerformed

@@ -41,12 +41,6 @@ public class ClientesCTD {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
             return false;
-        }finally{
-            try {
-                cn.close();
-            } catch (SQLException e) {
-                System.out.println(e.toString());
-            }
         }
     }
     public static void listarCliente(String busca){

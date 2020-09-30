@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -76,13 +78,24 @@ public class EnviosCTD {
         }
         String sql = "";
         if (busca.equals("")) {
-            sql = "SELECT*FROM envios ORDER BY id desc";
+            Calendar fecha=new GregorianCalendar();
+            int año=fecha.get(Calendar.YEAR);
+            int mes=fecha.get(Calendar.MONTH)+1;
+            int dia=fecha.get(Calendar.DAY_OF_MONTH);
+            String calendario;
+            if(mes<=9){
+                calendario=año+"-0"+mes+"-"+dia;
+            }else{
+                calendario=año+"-"+mes+"-"+dia;
+            }
+            sql = "SELECT*FROM envios where fecha_actual like'"+calendario+"%' ORDER BY id desc";
         } else {
-//            sql = "SELECT * FROM producto WHERE (idproducto LIKE'" + busca + "%' OR "
-//                    + "nombre LIKE'" + busca + "%' OR descripcion LIKE'" + busca + "%' OR "
-//                    + "tipoproducto LIKE'" + busca + "%' OR precio LIKE'" + busca + "%' OR "
-//                    + "idproducto LIKE'" + busca + "%') "
-//                    + "ORDER BY idproducto";
+            sql = "SELECT * FROM envios WHERE (id LIKE'" + busca + "%' OR "
+                    + "desde LIKE'" + busca + "%' OR hacia LIKE'" + busca + "%' OR "
+                    + "remitente LIKE'" + busca + "%' OR dni_rem LIKE'" + busca + "%' OR "
+                    + "beneficiario LIKE'" + busca + "%' OR dni_bene LIKE'" + busca + "%' OR "
+                    + "fecha_actual LIKE'" + busca + "%') "
+                    + "ORDER BY id desc";
         }
         String datos[] = new String[17];
         try {
