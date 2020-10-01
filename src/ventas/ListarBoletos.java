@@ -91,6 +91,7 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
         modificarBoleto = new principal.MaterialButton();
         buscarfexpedicion = new app.bolivia.swing.JCTextField();
         jLabel4 = new javax.swing.JLabel();
+        sacarporcentaje = new principal.MaterialButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         org.jdesktop.swingx.border.DropShadowBorder dropShadowBorder1 = new org.jdesktop.swingx.border.DropShadowBorder();
@@ -183,7 +184,7 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("TOTAL ENTRADAS: $");
+        jLabel6.setText("TOTAL PASAJES: $");
 
         lblTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTotal.setForeground(new java.awt.Color(255, 255, 255));
@@ -244,8 +245,8 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(eliminarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,6 +330,17 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos/campo-buscar.png"))); // NOI18N
 
+        sacarporcentaje.setBackground(new java.awt.Color(58, 159, 171));
+        sacarporcentaje.setForeground(new java.awt.Color(255, 255, 255));
+        sacarporcentaje.setText("SACAR PORCENTAJE");
+        sacarporcentaje.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        sacarporcentaje.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        sacarporcentaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sacarporcentajeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -350,7 +362,9 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
                                 .addGap(60, 60, 60)
                                 .addComponent(buscarfexpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(249, 249, 249)
+                        .addGap(63, 63, 63)
+                        .addComponent(sacarporcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(corte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(modificarBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,7 +385,8 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
                         .addComponent(corte, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CanbiarEstadoAabordo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CanbiarEstadoAnoAbordo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(modificarBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(modificarBoleto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sacarporcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -581,6 +596,13 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
         pdfreportePasajeros();
     }//GEN-LAST:event_imprimirreporteActionPerformed
 
+    private void sacarporcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sacarporcentajeActionPerformed
+        ModaBoletoM mp = new ModaBoletoM(new JFrame(), true);
+        mp.titulo.setText("SACAR GANANCIAS DEL DIA PASAJES!");
+        mp.txtPrecioTotal.setText(this.lblTotal.getText());
+        mp.setVisible(true);
+    }//GEN-LAST:event_sacarporcentajeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButton CanbiarEstadoAabordo;
@@ -603,6 +625,7 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lblTotal;
     private principal.MaterialButton modificarBoleto;
+    private principal.MaterialButton sacarporcentaje;
     public static javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
     double totalpagar=0;
