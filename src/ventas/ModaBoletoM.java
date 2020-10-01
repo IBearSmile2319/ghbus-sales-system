@@ -5,13 +5,9 @@
  */
 package ventas;
 
-import producto.*;
 import alertas.principal.AWTUtilities;
 import alertas.principal.ErrorAlert;
-import alertas.principal.SuccessAlert;
-import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;

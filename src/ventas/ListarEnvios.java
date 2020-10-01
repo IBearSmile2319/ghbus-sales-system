@@ -54,7 +54,7 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
     Cliente cl=new Cliente();
     
     DefaultTableModel modelo=new DefaultTableModel();
-    
+    Date date=new Date();
     
     public ListarEnvios() {
         initComponents();
@@ -66,6 +66,7 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
         jScrollPane1.getVerticalScrollBar().setUI(new MyScrollbarUI());
         jScrollPane1.getHorizontalScrollBar().setUI(new MyScrollbarUI());
         limpiaCampos();
+        txtFecha.setText(new SimpleDateFormat("d/MM/yyyy").format(date));
 
     }
     public void guardar_envio(){

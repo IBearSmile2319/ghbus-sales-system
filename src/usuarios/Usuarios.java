@@ -7,7 +7,7 @@ package usuarios;
 
 import alertas.principal.ErrorAlert;
 import alertas.principal.WarningAlertU;
-import clientes.ModalCientes;
+import usuarios.ModalUsuarios;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 import tabla.EstiloTablaHeader;
@@ -19,10 +19,6 @@ import tabla.MyScrollbarUI;
  * @author Rojeru San
  */
 public class Usuarios extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form NewJInternalFrame
-     */
     public Usuarios() {
         initComponents();
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -306,7 +302,7 @@ public class Usuarios extends javax.swing.JInternalFrame {
 
                 int fila = this.tabla.getSelectedRow();
 
-                ModalCientes mp = new ModalCientes(new JFrame(), true);
+                ModalUsuarios mp = new ModalUsuarios(new JFrame(), true);
                 mp.id.setText(this.tabla.getValueAt(fila, 0).toString());
                 mp.txtUsuario.setText(this.tabla.getValueAt(fila, 1).toString());
                 mp.txtPassword.setText(this.tabla.getValueAt(fila, 2).toString());

@@ -8,19 +8,20 @@ package producto;
 import alertas.principal.AWTUtilities;
 import alertas.principal.ErrorAlert;
 import alertas.principal.SuccessAlert;
-import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
+import Controlador.GananciasCTD;
+import Modelo.Ganancias;
 
 /**
  *
  * @author Rojeru San
  */
 public class ModalProductoM extends javax.swing.JDialog {
-
+    GananciasCTD gnctd=new GananciasCTD();
+    Ganancias gn=new Ganancias();
     Timer timer = null;
     TimerTask task;
     int i = 32;
@@ -50,7 +51,7 @@ public class ModalProductoM extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         porcentaje = new app.bolivia.swing.JCTextField();
         jPanel3 = new javax.swing.JPanel();
-        registrar = new principal.MaterialButton();
+        guardar = new principal.MaterialButton();
         id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -147,22 +148,22 @@ public class ModalProductoM extends javax.swing.JDialog {
         jPanel3.setBackground(new java.awt.Color(58, 159, 171));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        registrar.setBackground(new java.awt.Color(255, 255, 255));
-        registrar.setForeground(new java.awt.Color(58, 159, 171));
-        registrar.setText("GUARDAR");
-        registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        registrar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        registrar.addActionListener(new java.awt.event.ActionListener() {
+        guardar.setBackground(new java.awt.Color(255, 255, 255));
+        guardar.setForeground(new java.awt.Color(58, 159, 171));
+        guardar.setText("GUARDAR");
+        guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        guardar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
+                guardarActionPerformed(evt);
             }
         });
-        registrar.addKeyListener(new java.awt.event.KeyAdapter() {
+        guardar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                registrarKeyTyped(evt);
+                guardarKeyTyped(evt);
             }
         });
-        jPanel3.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 170, 50));
+        jPanel3.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 170, 50));
 
         id.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         id.setForeground(new java.awt.Color(255, 255, 255));
@@ -193,10 +194,30 @@ public class ModalProductoM extends javax.swing.JDialog {
         timer = new Timer();
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_cerrarActionPerformed
-
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
+    public void post_ventas(){
+        gn.setVenta_b_e("Encomiendas");
+        gn.setValordeldia(Double.parseDouble(txtPrecioTotal.getText()));
+        gn.setPorcentaje(Integer.parseInt(porcentaje.getText()));
+        gn.setGanancias(Double.parseDouble(TotalGananciasDelDia.getText()));
+        gnctd.ganancias_post(gn);
         
-    }//GEN-LAST:event_registrarActionPerformed
+    }
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        if(!"".equals(porcentaje.getText())){
+            post_ventas();
+            SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+            sa.titulo.setText("¡HECHO!");
+            sa.msj.setText("SE HA GUARDADO LAS");
+            sa.msj1.setText("GANANCIAS DEL DIA");
+            sa.setVisible(true);
+        }else{
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            er.titulo.setText("OOPS...");
+            er.msj.setText("EL CAMPO PORCENTAJE");
+            er.msj1.setText("ESTAN VACIOS");
+            er.setVisible(true);
+        }
+    }//GEN-LAST:event_guardarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         task = new TimerTask() {
@@ -215,11 +236,11 @@ public class ModalProductoM extends javax.swing.JDialog {
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_formWindowOpened
 
-    private void registrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_registrarKeyTyped
+    private void guardarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_guardarKeyTyped
         if ((evt.getKeyChar() == KeyEvent.VK_ENTER)) {
             
         }
-    }//GEN-LAST:event_registrarKeyTyped
+    }//GEN-LAST:event_guardarKeyTyped
     float porc;
     private void porcentajeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_porcentajeKeyPressed
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){ 
@@ -292,6 +313,7 @@ public class ModalProductoM extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static app.bolivia.swing.JCTextField TotalGananciasDelDia;
     private principal.MaterialButton cerrar;
+    public static principal.MaterialButton guardar;
     public static javax.swing.JLabel id;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -301,7 +323,6 @@ public class ModalProductoM extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private org.edisoncor.gui.panel.Panel panel1;
     public static app.bolivia.swing.JCTextField porcentaje;
-    public static principal.MaterialButton registrar;
     public static javax.swing.JLabel titulo;
     public static app.bolivia.swing.JCTextField txtPrecioTotal;
     // End of variables declaration//GEN-END:variables

@@ -2,15 +2,13 @@
 package about;
 
 import alertas.principal.AWTUtilities;
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
+import Controlador.GananciasCTD;
+import alertas.principal.ErrorAlert;
+import alertas.principal.WarningAlertA1;
+import alertas.principal.WarningAlertA;
 
 /**
  *
@@ -22,14 +20,13 @@ public class About extends javax.swing.JDialog {
     TimerTask task;
     int i = 32;
 
-    /**
-     * Creates new form Principal
-     */
+   
     public About(JFrame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         AWTUtilities.setOpaque(this, false);
         Ubicar(0);
+        GananciasCTD.listarganancias("");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,12 +38,11 @@ public class About extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
+        eliminar = new principal.MaterialButton();
+        eliminarTodo = new principal.MaterialButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -76,11 +72,11 @@ public class About extends javax.swing.JDialog {
             }
         });
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/about/ABOUT.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/almacen/icono.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("ACERCA DE");
+        jLabel2.setText("¡VENTAS DEL DIA!");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -96,7 +92,7 @@ public class About extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(74, 74, 74)
                     .addComponent(jLabel2)
-                    .addContainerGap(454, Short.MAX_VALUE)))
+                    .addContainerGap(393, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,87 +113,74 @@ public class About extends javax.swing.JDialog {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(58, 159, 171), 5));
 
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/about/hacerca.png"))); // NOI18N
+        tabla.setBackground(new java.awt.Color(0, 0, 0));
+        tabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tabla.setForeground(new java.awt.Color(255, 255, 255));
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ISTEMA DESARROLLADO POR IBEARSMILE_");
+            },
+            new String [] {
+                "COD", "VENTA", "FECHA", "S/: VENTAS", "%", "GANANCIAS"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false, true
+            };
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(58, 159, 171));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/about/face.png"))); // NOI18N
-        jButton2.setText("Ir a facebook");
-        jButton2.setToolTipText("<html> <head> <style> #contenedor{background:white;color:black; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Ir a facebook</h4> </body> </html>");
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(58, 159, 171));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/about/canal.png"))); // NOI18N
-        jButton1.setText("Ir a youtube");
-        jButton1.setToolTipText("<html> <head> <style> #contenedor{background:white;color:black; padding-left:10px;padding-right:10px;margin:0; padding-top:5px;padding-bottom:5px;} </style> </head> <body> <h4 id=\"contenedor\">Ir a youtube</h4> </body> </html>");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(58, 159, 171));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("VERSION 1.0");
+        tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabla.setDoubleBuffered(true);
+        tabla.setRowHeight(20);
+        tabla.setSelectionBackground(new java.awt.Color(0, 153, 255));
+        tabla.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(171, 171, 171))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 155, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(81, 81, 81))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 580, 340));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 620, 330));
 
         jPanel5.setBackground(new java.awt.Color(58, 159, 171));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        eliminar.setBackground(new java.awt.Color(58, 159, 171));
+        eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        eliminar.setText("ELIMINAR");
+        eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        eliminar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
+
+        eliminarTodo.setBackground(new java.awt.Color(58, 159, 171));
+        eliminarTodo.setForeground(new java.awt.Color(255, 255, 255));
+        eliminarTodo.setText("ELIMINAR TODO");
+        eliminarTodo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        eliminarTodo.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        eliminarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarTodoActionPerformed(evt);
+            }
+        });
+        jPanel5.add(eliminarTodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, -1, -1));
+
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 270, 631, 195));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 470));
@@ -222,22 +205,6 @@ public class About extends javax.swing.JDialog {
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_cerrarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            Desktop.getDesktop().browse(new URI("https://www.facebook.com/maicol.oroscovasquez.10/"));
-        } catch (IOException | URISyntaxException ex) {
-            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            Desktop.getDesktop().browse(new URI("https://www.youtube.com/channel/UC1j4fpCRkkUkiTbVU1TIQlQ?view_as=subscriber"));
-        } catch (IOException | URISyntaxException ex) {
-            Logger.getLogger(About.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         task = new TimerTask() {
             @Override
@@ -255,6 +222,56 @@ public class About extends javax.swing.JDialog {
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_formWindowOpened
 
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        if (this.tabla.getRowCount() < 1) {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            er.titulo.setText("OOPS...");
+            er.msj.setText("LA TABLA ESTA VACÍA");
+            er.msj1.setText("");
+            er.setVisible(true);
+        } else {
+            if (this.tabla.getSelectedRowCount() < 1) {
+                ErrorAlert er = new ErrorAlert(new JFrame(), true);
+                er.titulo.setText("OOPS...");
+                er.msj.setText("SELECCIONA UN");
+                er.msj1.setText("REGISTRO");
+                er.setVisible(true);
+            } else {
+                int fila = this.tabla.getSelectedRow();
+                WarningAlertA wa = new WarningAlertA(new JFrame(), true);
+                wa.id.setText(this.tabla.getValueAt(fila, 0).toString());
+                wa.titulo.setText("¿ESTAS SEGURO?");
+                wa.msj.setText("SE BORRARA PERMANENTEMENTE");
+                wa.msj1.setText("");
+                wa.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void eliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarTodoActionPerformed
+        if (this.tabla.getRowCount() < 1) {
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            er.titulo.setText("OOPS...");
+            er.msj.setText("LA TABLA ESTA VACÍA");
+            er.msj1.setText("");
+            er.setVisible(true);
+        } else {
+            WarningAlertA1 wa = new WarningAlertA1(new JFrame(), true);
+            wa.titulo.setText("¿ESTAS SEGURO?");
+            wa.msj.setText("SE BORRARAN TODOS LOS");
+            wa.msj1.setText("REGISTROS PERMANENTEMENTE");
+            wa.setVisible(true);
+        }
+    }//GEN-LAST:event_eliminarTodoActionPerformed
+
+    public static void seleccionaFila(String id) {
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            if (id.equals(tabla.getValueAt(i, 0).toString())) {
+                tabla.setRowSelectionInterval(i, i);
+                break;
+            }
+        }
+    }
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -289,17 +306,16 @@ public class About extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButton cerrar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private principal.MaterialButton eliminar;
+    private principal.MaterialButton eliminarTodo;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 
     private void Cerrar() {

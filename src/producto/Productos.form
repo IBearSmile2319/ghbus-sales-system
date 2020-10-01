@@ -73,7 +73,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="sacarporcentaje" min="-2" pref="180" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="modificar" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="imprimirenvios" min="-2" pref="180" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="eliminar" min="-2" pref="180" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -111,7 +111,7 @@
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                           <Component id="sacarporcentaje" min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="modificar" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="imprimirenvios" min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -445,7 +445,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="principal.MaterialButton" name="modificar">
+        <Component class="principal.MaterialButton" name="imprimirenvios">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ab" green="9f" red="3a" type="rgb"/>
@@ -462,7 +462,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="imprimirenviosActionPerformed"/>
           </Events>
         </Component>
         <Component class="principal.MaterialButton" name="eliminar">

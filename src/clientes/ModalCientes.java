@@ -33,9 +33,7 @@ public class ModalCientes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         AWTUtilities.setOpaque(this, false);
-        this.tipo.setCursor(new Cursor(12));
         this.id.setVisible(false);
-        this.nombreUs.setVisible(false);
         Ubicar(0);
         this.txtUsuario.requestFocus();
     }
@@ -45,7 +43,6 @@ public class ModalCientes extends javax.swing.JDialog {
         this.txtUsuario.requestFocus();
         this.txtUsuario.setText("");
         this.txtPassword.setText("");
-        this.tipo.setSelectedIndex(0);
 
         clctd.listarCliente("");
 
@@ -65,13 +62,10 @@ public class ModalCientes extends javax.swing.JDialog {
         cerrar = new principal.MaterialButton();
         titulo = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        tipo = new componentes.org1.bolivia.combo.SComboBox();
         txtUsuario = new app.bolivia.swing.JCTextField();
         jLabel7 = new javax.swing.JLabel();
         txtPassword = new jpass.JRPasswordField();
         jLabel8 = new javax.swing.JLabel();
-        nombreUs = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         limpiar = new principal.MaterialButton();
         registrar = new principal.MaterialButton();
@@ -134,33 +128,23 @@ public class ModalCientes extends javax.swing.JDialog {
         jPanel4.setBorder(dropShadowBorder1);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarios/icono-usuario.png"))); // NOI18N
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
-
-        tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TIPO USUARIO", "ADMINISTRADOR", "NORMAL" }));
-        tipo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel4.add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 240, 30));
-
         txtUsuario.setBorder(null);
         txtUsuario.setForeground(new java.awt.Color(58, 159, 171));
         txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtUsuario.setPlaceholder("USUARIO");
-        jPanel4.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 240, 30));
+        jPanel4.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 240, 30));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login/campo-usuario.png"))); // NOI18N
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         txtPassword.setBorder(null);
         txtPassword.setForeground(new java.awt.Color(58, 159, 171));
         txtPassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtPassword.setPlaceholder("CONTRASEÑA");
-        jPanel4.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 240, -1));
+        jPanel4.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 240, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/login/campo-contrasena.png"))); // NOI18N
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
-
-        nombreUs.setText("nombreUs");
-        jPanel4.add(nombreUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 370, -1));
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         panel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 420, 330));
 
@@ -232,9 +216,7 @@ public class ModalCientes extends javax.swing.JDialog {
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        if (this.txtUsuario.getText().equals("") || this.txtPassword.getText().equals("")
-                || this.tipo.getSelectedIndex() == 0) {
-
+        if (this.txtUsuario.getText().equals("") || this.txtPassword.getText().equals("")) {
             ErrorAlert er = new ErrorAlert(new JFrame(), true);
             er.titulo.setText("OOPS...");
             er.msj.setText("FALTAN CAMPOS DE LLENAR");
@@ -252,8 +234,7 @@ public class ModalCientes extends javax.swing.JDialog {
 
                 if (this.registrar.getText().equals("GUARDAR")) {
 
-                    if (clctd.verificaCliente(this.txtUsuario.getText())
-                            && !this.txtUsuario.getText().equals(this.nombreUs.getText())) {
+                    if (clctd.verificaCliente(this.txtUsuario.getText())) {
                         ErrorAlert er = new ErrorAlert(new JFrame(), true);
                         er.titulo.setText("OOPS...");
                         er.msj.setText("EL NOMBRE DE USUARIO");
@@ -261,12 +242,6 @@ public class ModalCientes extends javax.swing.JDialog {
                         er.setVisible(true);
                     } else {
                         Cliente c = new Cliente();
-
-//                        c.setUsuario(this.txtUsuario.getText());
-//                        c.setPassword(this.txtPassword.getText());
-//                        c.setTipo(this.tipo.getSelectedItem().toString());
-//                        c.setId(Integer.parseInt(this.id.getText()));
-
                         int opcion = clctd.actualizar(c);
                         if (opcion != 0) {
                             clctd.listarCliente("");
@@ -278,29 +253,7 @@ public class ModalCientes extends javax.swing.JDialog {
                         }
                     }
                 } else {
-//                    if (Opciones.verificaUsuario(this.txtUsuario.getText())) {
-//                        ErrorAlert er = new ErrorAlert(new JFrame(), true);
-//                        er.titulo.setText("OOPS...");
-//                        er.msj.setText("EL NOMBRE DE USUARIO");
-//                        er.msj1.setText("YA ÉXISTE");
-//                        er.setVisible(true);
-//                    } else {
-//                        Sentencias s = new Sentencias();
-//
-//                        s.setUsuario(this.txtUsuario.getText());
-//                        s.setPassword(this.txtPassword.getText());
-//                        s.setTipo(this.tipo.getSelectedItem().toString());
-//
-//                        int opcion = Opciones.registrar(s);
-//                        if (opcion != 0) {
-//                            limpiarCampos();
-//                            SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-//                            sa.titulo.setText("¡HECHO!");
-//                            sa.msj.setText("SE HA REGISTRADO UN");
-//                            sa.msj1.setText("NUEVO USUARIO");
-//                            sa.setVisible(true);
-//                       }
-//                    }
+//                    
                 }
             }
         }
@@ -325,8 +278,7 @@ public class ModalCientes extends javax.swing.JDialog {
 
     private void registrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_registrarKeyTyped
         if ((evt.getKeyChar() == KeyEvent.VK_ENTER)) {
-            if (this.txtUsuario.getText().equals("") || this.txtPassword.getText().equals("")
-                    || this.tipo.getSelectedIndex() == 0) {
+            if (this.txtUsuario.getText().equals("") || this.txtPassword.getText().equals("")) {
 
                 ErrorAlert er = new ErrorAlert(new JFrame(), true);
                 er.titulo.setText("OOPS...");
@@ -345,55 +297,6 @@ public class ModalCientes extends javax.swing.JDialog {
 
                     if (this.registrar.getText().equals("GUARDAR")) {
 
-//                        if (Opciones.verificaUsuario(this.txtUsuario.getText())
-//                                && !this.txtUsuario.getText().equals(this.nombreUs.getText())) {
-//                            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-//                            er.titulo.setText("OOPS...");
-//                            er.msj.setText("EL NOMBRE DE USUARIO");
-//                            er.msj1.setText("YA ÉXISTE");
-//                            er.setVisible(true);
-//                        } else {
-//                            Sentencias s = new Sentencias();
-//
-//                            s.setUsuario(this.txtUsuario.getText());
-//                            s.setPassword(this.txtPassword.getText());
-//                            s.setTipo(this.tipo.getSelectedItem().toString());
-//                            s.setId(Integer.parseInt(this.id.getText()));
-//
-//                            int opcion = Opciones.actualizar(s);
-//                            if (opcion != 0) {
-//                                Opciones.listar("");
-//                                SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-//                                sa.titulo.setText("¡HECHO!");
-//                                sa.msj.setText("SE HAN GUARDADO LOS CAMBIOS");
-//                                sa.msj1.setText("");
-//                                sa.setVisible(true);
-//                            }
-//                        }
-//                    } else {
-//                        if (Opciones.verificaUsuario(this.txtUsuario.getText())) {
-//                            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-//                            er.titulo.setText("OOPS...");
-//                            er.msj.setText("EL NOMBRE DE USUARIO");
-//                            er.msj1.setText("YA ÉXISTE");
-//                            er.setVisible(true);
-//                        } else {
-//                            Sentencias s = new Sentencias();
-//
-//                            s.setUsuario(this.txtUsuario.getText());
-//                            s.setPassword(this.txtPassword.getText());
-//                            s.setTipo(this.tipo.getSelectedItem().toString());
-//
-//                            int opcion = Opciones.registrar(s);
-//                            if (opcion != 0) {
-//                                limpiarCampos();
-//                                SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-//                                sa.titulo.setText("¡HECHO!");
-//                                sa.msj.setText("SE HA REGISTRADO UN");
-//                                sa.msj1.setText("NUEVO USUARIO");
-//                                sa.setVisible(true);
-//                            }
-//                        }
                     }
                 }
             }
@@ -460,17 +363,14 @@ public class ModalCientes extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private principal.MaterialButton cerrar;
     public static javax.swing.JLabel id;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private principal.MaterialButton limpiar;
-    public static javax.swing.JLabel nombreUs;
     private org.edisoncor.gui.panel.Panel panel1;
     public static principal.MaterialButton registrar;
-    public static componentes.org1.bolivia.combo.SComboBox tipo;
     public static javax.swing.JLabel titulo;
     public static jpass.JRPasswordField txtPassword;
     public static app.bolivia.swing.JCTextField txtUsuario;

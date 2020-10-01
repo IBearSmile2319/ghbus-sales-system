@@ -311,7 +311,6 @@ public class Clientes extends javax.swing.JInternalFrame {
                 mp.id.setText(this.tabla.getValueAt(fila, 0).toString());
                 mp.txtUsuario.setText(this.tabla.getValueAt(fila, 1).toString());
                 mp.txtPassword.setText(this.tabla.getValueAt(fila, 2).toString());
-                mp.nombreUs.setText(this.tabla.getValueAt(fila, 1).toString());
                 mp.titulo.setText("MODIFICAR");
                 mp.registrar.setText("GUARDAR");
                 mp.setVisible(true);

@@ -54,7 +54,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         buscar = new app.bolivia.swing.JCTextField();
         jLabel3 = new javax.swing.JLabel();
-        modificar = new principal.MaterialButton();
+        imprimirenvios = new principal.MaterialButton();
         eliminar = new principal.MaterialButton();
         eliminarTodo = new principal.MaterialButton();
         sacarporcentaje = new principal.MaterialButton();
@@ -199,14 +199,14 @@ public class Productos extends javax.swing.JInternalFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos/campo-buscar.png"))); // NOI18N
 
-        modificar.setBackground(new java.awt.Color(58, 159, 171));
-        modificar.setForeground(new java.awt.Color(255, 255, 255));
-        modificar.setText("IMPRIMIR");
-        modificar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        modificar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        modificar.addActionListener(new java.awt.event.ActionListener() {
+        imprimirenvios.setBackground(new java.awt.Color(58, 159, 171));
+        imprimirenvios.setForeground(new java.awt.Color(255, 255, 255));
+        imprimirenvios.setText("IMPRIMIR");
+        imprimirenvios.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imprimirenvios.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
+        imprimirenvios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarActionPerformed(evt);
+                imprimirenviosActionPerformed(evt);
             }
         });
 
@@ -255,7 +255,7 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(sacarporcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imprimirenvios, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
@@ -284,7 +284,7 @@ public class Productos extends javax.swing.JInternalFrame {
                         .addComponent(eliminarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(sacarporcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(imprimirenvios, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -342,9 +342,9 @@ public class Productos extends javax.swing.JInternalFrame {
         mp.setVisible(true);
     }//GEN-LAST:event_sacarporcentajeActionPerformed
 
-    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+    private void imprimirenviosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirenviosActionPerformed
         
-    }//GEN-LAST:event_modificarActionPerformed
+    }//GEN-LAST:event_imprimirenviosActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         if (this.tabla.getRowCount() < 1) {
@@ -375,6 +375,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
     private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
         enctd.listar(this.buscar.getText());
+        totalpagar();
     }//GEN-LAST:event_buscarKeyReleased
 
     private void buscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyTyped
@@ -393,6 +394,7 @@ public class Productos extends javax.swing.JInternalFrame {
     private principal.MaterialButton cerrar;
     private principal.MaterialButton eliminar;
     private principal.MaterialButton eliminarTodo;
+    private principal.MaterialButton imprimirenvios;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -401,7 +403,6 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private principal.MaterialButton modificar;
     private principal.MaterialButton sacarporcentaje;
     public static javax.swing.JTable tabla;
     public static javax.swing.JLabel txtTotal;
@@ -416,6 +417,6 @@ public class Productos extends javax.swing.JInternalFrame {
         }
         txtTotal.setText(String.valueOf(totalpagar));
     }
-
+    
 
 }
