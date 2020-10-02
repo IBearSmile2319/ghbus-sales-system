@@ -5,8 +5,11 @@
  */
 package ventas;
 
+import Controlador.GananciasCTD;
+import Modelo.Ganancias;
 import alertas.principal.AWTUtilities;
 import alertas.principal.ErrorAlert;
+import alertas.principal.SuccessAlert;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,7 +20,8 @@ import javax.swing.JFrame;
  * @author Rojeru San
  */
 public class ModaBoletoM extends javax.swing.JDialog {
-
+    GananciasCTD gnctd=new GananciasCTD();
+    Ganancias gn=new Ganancias();
     Timer timer = null;
     TimerTask task;
     int i = 32;
@@ -190,9 +194,29 @@ public class ModaBoletoM extends javax.swing.JDialog {
         timer = new Timer();
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_cerrarActionPerformed
-
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
+    public void post_ventas(){
+        gn.setVenta_b_e("Encomiendas");
+        gn.setValordeldia(Double.parseDouble(txtPrecioTotal.getText()));
+        gn.setPorcentaje(Integer.parseInt(porcentaje.getText()));
+        gn.setGanancias(Double.parseDouble(TotalGananciasDelDia.getText()));
+        gnctd.ganancias_post(gn);
         
+    }
+    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
+        if(!"".equals(porcentaje.getText())){
+            post_ventas();
+            SuccessAlert sa = new SuccessAlert(new JFrame(), true);
+            sa.titulo.setText("¡HECHO!");
+            sa.msj.setText("SE HA GUARDADO LAS");
+            sa.msj1.setText("GANANCIAS DEL DIA");
+            sa.setVisible(true);
+        }else{
+            ErrorAlert er = new ErrorAlert(new JFrame(), true);
+            er.titulo.setText("OOPS...");
+            er.msj.setText("EL CAMPO PORCENTAJE");
+            er.msj1.setText("ESTAN VACIOS");
+            er.setVisible(true);
+        }
     }//GEN-LAST:event_registrarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
