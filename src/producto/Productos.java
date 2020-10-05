@@ -9,6 +9,27 @@ import Controlador.EnviosCTD;
 import alertas.principal.ErrorAlert;
 import alertas.principal.WarningAlertP;
 import alertas.principal.WarningAlertP1;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
 import tabla.EstiloTablaHeader;
@@ -343,7 +364,7 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_sacarporcentajeActionPerformed
 
     private void imprimirenviosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirenviosActionPerformed
-        
+        pdfReporteEnvios();
     }//GEN-LAST:event_imprimirenviosActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -417,6 +438,110 @@ public class Productos extends javax.swing.JInternalFrame {
         }
         txtTotal.setText(String.valueOf(totalpagar));
     }
-    
+    public void pdfReporteEnvios(){
+        try {
+            String fechabusqueda=buscar.getText();
+            Date date=new Date();
+            /*comienzo del pdf*/
+            FileOutputStream archivo;
+            File file;
+            if(!"".equals(fechabusqueda)){
+                file=new File("src/REPORTES/ReporteEncomiendas"+fechabusqueda+"_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
+            }else{
+                file=new File("src/REPORTES/ReporteTodo_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
+            }
+            
+            archivo= new FileOutputStream(file);
+            Document doc= new Document();
+                PdfWriter.getInstance(doc,archivo);
+                doc.open();
+//                Image img= Image.getInstance("/src/imgenes/logo.png");
+                Paragraph fecha= new Paragraph();
+                Font negrita= new Font(Font.FontFamily.TIMES_ROMAN,20,Font.BOLD,BaseColor.BLUE);
+                fecha.add(Chunk.NEWLINE);
+                
+                fecha.add("REPORTE:1 \n"+"FECHA: "+new SimpleDateFormat("d/MM/yyyy").format(date)+"\n\n");
+                PdfPTable Encabezado=new PdfPTable(3);
+                Encabezado.setWidthPercentage(100);
+                Encabezado.getDefaultCell().setBorder(0);
+                float[] ColumnaEncabezado=new float[]{35f,30f,35f};
+                Encabezado.setWidths(ColumnaEncabezado);
+                Encabezado.setHorizontalAlignment(Element.ALIGN_CENTER);
+                String enca="LISTADO DE ENVIOS";
+                Encabezado.addCell("");
+                Encabezado.addCell(enca);
+                Encabezado.addCell("");
+                doc.add(Encabezado);
+                /*FIN DE ENCABEZADO*/
+                Paragraph bole=new Paragraph();
+                bole.add(Chunk.NEWLINE);
+                bole.add("\n");
+                doc.add(bole);
+                /*-----CUADRO1-------*/
+                PdfPTable tablaboleto=new PdfPTable(7);
+                tablaboleto.setWidthPercentage(100);
+                tablaboleto.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] Columnatablaboleto=new float[]{4f,13f,26f,26f,18f,14f,16f,};
+                tablaboleto.setWidths(Columnatablaboleto);
+                tablaboleto.setHorizontalAlignment(Element.ALIGN_LEFT);
+                PdfPCell bole1=new PdfPCell(new Phrase("\n\nN\n\n"));
+                PdfPCell bole2=new PdfPCell(new Phrase("\n\n\nDESDE\n   /   \nHACIA.\n\n"));
+                PdfPCell bole3=new PdfPCell(new Phrase("\nREMITENTE\n   /   \nDNI\n   /   \nCELULAR.\n\n"));
+                PdfPCell bole4=new PdfPCell(new Phrase("\nDESTINATATIO\n   /  \nDNI\n   /   \nCELULAR.\n\n"));
+                PdfPCell bole5=new PdfPCell(new Phrase("\n\nDIRECCION\n\n"));
+                PdfPCell bole6=new PdfPCell(new Phrase("\n\nCORREO\n"));
+                PdfPCell bole7=new PdfPCell(new Phrase("\nCANTIDAD\n   /   \nCONTENIDO.\n"));
+                bole1.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                bole2.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                bole3.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                bole4.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                bole5.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                bole6.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                bole7.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                tablaboleto.addCell(bole1);
+                tablaboleto.addCell(bole2);
+                tablaboleto.addCell(bole3);
+                tablaboleto.addCell(bole4);
+                tablaboleto.addCell(bole5);
+                tablaboleto.addCell(bole6);
+                tablaboleto.addCell(bole7);
+                int cant=0;
+                    for (int i = 0; i < tabla.getRowCount(); i++) {
+                        cant++;
+                        String cantidad=String.valueOf(cant);
+                        String desde=tabla.getValueAt(i, 1).toString();
+                        String hacia=tabla.getValueAt(i, 2).toString();
+                        String remit=tabla.getValueAt(i, 3).toString();
+                        String dnirem=tabla.getValueAt(i, 4).toString();
+                        String celularrem=tabla.getValueAt(i, 5).toString();
+                        String benefi=tabla.getValueAt(i, 6).toString();
+                        String dnibenefi=tabla.getValueAt(i, 7).toString();
+                        String celularbenefi=tabla.getValueAt(i, 8).toString();
+                        String direccion=tabla.getValueAt(i, 9).toString();
+                        String correo=tabla.getValueAt(i, 10).toString();
+                        String canti=tabla.getValueAt(i, 11).toString();
+                        String contenido=tabla.getValueAt(i, 12).toString();
+                        String clave=tabla.getValueAt(i, 15).toString();
+                        
+                        tablaboleto.addCell("\n\n\n"+cantidad+"\n\n");
+                        tablaboleto.addCell("\n\n"+desde+"\n   /   \n"+hacia+"\n\n");
+                        tablaboleto.addCell("\n\n"+remit+"\n   /   \nDNI:"+dnirem+"\n   /   \nCEL:"+celularrem+"\n\n");
+                        tablaboleto.addCell("\n\n"+benefi+"\n   /   \nDNI:"+dnibenefi+"\n   /   \nCEL:"+celularbenefi+"\n\n");
+                        tablaboleto.addCell("\n\n"+direccion+"\n\n");
+                        tablaboleto.addCell("\n\n"+correo+"\n\n");
+                        tablaboleto.addCell("\n\nCantidad:"+canti+"\n   /   \nCONT:"+contenido+"\n   /   \nClave: "+clave+"\n\n");
+
+                }
+                doc.add(tablaboleto);
+                
+                doc.close();
+                archivo.close();
+                Desktop.getDesktop().open(file);
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

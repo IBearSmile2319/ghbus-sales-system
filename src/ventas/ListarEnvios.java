@@ -870,14 +870,14 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
         try {
             Date date=new Date();
             /**variables esternas*/
-            
+            int id=enctd.extraerID();
             
             /*convertir numero a letras*/
             
             
             /*comienzo del pdf*/
             FileOutputStream archivo;
-            File file=new File("src/pdf/Encomienda.pdf");
+            File file=new File("src/pdf/Encomienda_"+id+".pdf");
             archivo= new FileOutputStream(file);
             Document doc= new Document();
                 PdfWriter.getInstance(doc,archivo);
@@ -887,18 +887,18 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 Font negrita= new Font(Font.FontFamily.TIMES_ROMAN,11,Font.BOLD,BaseColor.BLUE);
                 fecha.add(Chunk.NEWLINE);
                 
-                fecha.add("FACTURA:01"+" \n"+"FECHA: "+new SimpleDateFormat("d/MM/yyyy").format(date)+"\n\n");
+                fecha.add("FACTURA: \n"+"FECHA: "+new SimpleDateFormat("d/MM/yyyy").format(date)+"\n\n");
                 PdfPTable Encabezado=new PdfPTable(3);
                 Encabezado.setWidthPercentage(100);
                 Encabezado.getDefaultCell().setBorder(0);
                 float[] ColumnaEncabezado=new float[]{140f,10f,60f};
                 Encabezado.setWidths(ColumnaEncabezado);
                 Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
-//                if(id<=9){
-//                    Encabezado.addCell("RECIBO: N°00\nGHBUS EMPRESA DE TRANSPORTES GRUPO HORNA\nPARA TRANSPORTE DE PASAJEROS.");
-//                }else{
-                    Encabezado.addCell("RECIBO: N°001\nGHBUS EMPRESA DE TRANSPORTES GRUPO HORNA\nPARA TRANSPORTE DE CARGA Y ENCOMIENDA.");
-//                }
+                if(id<=9){
+                    Encabezado.addCell("RECIBO: N°00"+id+"\nGHBUS EMPRESA DE TRANSPORTES GRUPO HORNA\nPARA TRANSPORTE DE CARGA Y ENCOMIENDA.");
+                }else{
+                    Encabezado.addCell("RECIBO: N°0"+id+"\nGHBUS EMPRESA DE TRANSPORTES GRUPO HORNA\nPARA TRANSPORTE DE CARGA Y ENCOMIENDA.");
+                }
                 
                 Encabezado.addCell("");
                 Encabezado.addCell(fecha);

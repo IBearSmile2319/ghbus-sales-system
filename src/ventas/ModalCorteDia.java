@@ -692,7 +692,7 @@ public class ModalCorteDia extends javax.swing.JDialog {
             
             /*comienzo del pdf*/
             FileOutputStream archivo;
-            File file=new File("src/pdf/boleto"+id+".pdf");
+            File file=new File("src/pdf/boleto_"+id+".pdf");
             archivo= new FileOutputStream(file);
             Document doc= new Document();
                 PdfWriter.getInstance(doc,archivo);
