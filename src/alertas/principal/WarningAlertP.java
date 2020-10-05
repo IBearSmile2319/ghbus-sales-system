@@ -11,22 +11,12 @@ import java.util.TimerTask;
 import javax.swing.JFrame;
 import Controlador.EnviosCTD;
 
-/**
- *
- * @author Rojeru San
- */
 public class WarningAlertP extends javax.swing.JDialog {
     EnviosCTD enctd=new EnviosCTD();
     Timer timer = null;
     TimerTask task;
     int i = 32;
 
-    /**
-     * Creates new form Error
-     *
-     * @param parent
-     * @param modal
-     */
     public WarningAlertP(JFrame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -200,11 +190,7 @@ public class WarningAlertP extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

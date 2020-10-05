@@ -6,15 +6,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Rojeru San
- */
 public class FadeEffect {
 
     public static void fadeIn(final JDialog dialog, int delay, final float incrementSize) {

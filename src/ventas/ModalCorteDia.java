@@ -111,12 +111,10 @@ public class ModalCorteDia extends javax.swing.JDialog {
             clctd.Registrar_cliente(cl);
     }
     public void G_V_cliente_boleto(){
-        ClientesCTD cli=new ClientesCTD();
-        String dniboleto=lbldni.getText();
-        Cliente clienboleto=cli.verificar(dniboleto);
-        if(clienboleto==null){
-            guardar_cliente_boleto();
-            
+        String dni=lbldni.getText();
+        Cliente clien=clctd.verificarCli(dni);
+        if(clien.getNombre()!=null){
+            guardar_cliente_boleto();            
         }else{
             System.out.println("Ya existe el cliente");
         }
@@ -548,8 +546,7 @@ public class ModalCorteDia extends javax.swing.JDialog {
                     sa.setVisible(true);
             }else{
                 guardar_modificar_boleto();
-                guardar_cliente_boleto();
-                
+                G_V_cliente_boleto();
                 blctd.listarBoletos("");
                 SuccessAlert sa = new SuccessAlert(new JFrame(), true);
                 sa.titulo.setText("¡HECHO!");

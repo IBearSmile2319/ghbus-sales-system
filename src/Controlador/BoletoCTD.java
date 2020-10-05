@@ -97,10 +97,22 @@ public class BoletoCTD {
             int dia=fecha.get(Calendar.DAY_OF_MONTH);
             String calendario;
             if(mes<=9){
-                calendario=año+"-0"+mes+"-"+dia;
+                if(dia<=9){
+                    calendario=año+"-0"+mes+"-0"+dia;
+                }else{
+                    calendario=año+"-0"+mes+"-"+dia;
+                }
+                
             }else{
-                calendario=año+"-"+mes+"-"+dia;
+                if(dia<=9){
+                    calendario=año+"-"+mes+"-0"+dia;
+                }else{
+                    calendario=año+"-"+mes+"-"+dia;
+                }
+                
             }
+            
+            System.out.print(calendario);
             sql = "select*from boleto where fecha_expedicion like'"+calendario+"%' order by id desc";
         } else {
             sql = "SELECT * FROM boleto WHERE id LIKE'" + busca + "%' OR "

@@ -84,11 +84,20 @@ public class EnviosCTD {
             int dia=fecha.get(Calendar.DAY_OF_MONTH);
             String calendario;
             if(mes<=9){
-                calendario=año+"-0"+mes+"-"+dia;
+                if(dia<=9){
+                    calendario=año+"-0"+mes+"-0"+dia;
+                }else{
+                    calendario=año+"-0"+mes+"-"+dia;
+                }
             }else{
-                calendario=año+"-"+mes+"-"+dia;
+                if(dia<=9){
+                    calendario=año+"-"+mes+"-0"+dia;
+                }else{
+                    calendario=año+"-"+mes+"-"+dia;
+                }
+                
             }
-            sql = "SELECT*FROM envios where fecha_actual like'"+calendario+"%' ORDER BY id desc";
+            sql = "SELECT*FROM envios where fecha_actual LIKE'"+calendario+"%' ORDER BY id desc";
         } else {
             sql = "SELECT * FROM envios WHERE (id LIKE'" + busca + "%' OR "
                     + "desde LIKE'" + busca + "%' OR hacia LIKE'" + busca + "%' OR "

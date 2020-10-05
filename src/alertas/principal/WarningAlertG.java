@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package alertas.principal;
 
 import java.awt.event.KeyEvent;
@@ -10,11 +6,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import salidas.Opciones;
-
-/**
- *
- * @author Rojeru San
- */
 public class WarningAlertG extends javax.swing.JDialog {
 
     Timer timer = null;

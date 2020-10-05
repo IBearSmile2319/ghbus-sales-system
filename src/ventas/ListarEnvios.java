@@ -915,7 +915,7 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 float[] ColumnaFila1=new float[]{80f,80F,80f};
                 fila1.setWidths(ColumnaFila1);
                 fila1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                fila1.addCell("\nDESTINO:"+txtDe.getText().toUpperCase());
+                fila1.addCell("\nDESTINO: "+txtDe.getText().toUpperCase());
                 fila1.addCell("\nA: "+txtA.getText().toUpperCase()+"\n\n");
                 fila1.addCell("\nFECHA: "+new SimpleDateFormat("dd/MMM").format(date).toUpperCase()+"\n\n");
                 doc.add(fila1);
@@ -1012,10 +1012,10 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 float[] ColumnaFila0=new float[]{25f,25f,25f,25f};
                 fila0.setWidths(ColumnaFila0);
                 fila0.setHorizontalAlignment(Element.ALIGN_CENTER);
-                fila0.addCell("");
-                fila0.addCell("");
-                fila0.addCell("");
-                fila0.addCell("");
+                fila0.addCell("\n");
+                fila0.addCell("\n");
+                fila0.addCell("\n");
+                fila0.addCell("\n");
                 doc.add(fila0);
                 //tabla10
                 PdfPTable fila10=new PdfPTable(4);

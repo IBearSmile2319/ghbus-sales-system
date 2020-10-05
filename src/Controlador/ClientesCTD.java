@@ -39,7 +39,7 @@ public class ClientesCTD {
             ps.execute();
             return true;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
+            
             return false;
         }
     }
@@ -50,7 +50,7 @@ public class ClientesCTD {
         }
         String sql="";
         if(busca.equals("")){
-            sql="select*from clientes";
+            sql="select*from clientes ";
         }else{
             sql="SELECT*FROM clientes where (id LIKE '"+busca+"%' OR "
                     +"nombre LIKE'" + busca + "%' OR dni LIKE'" + busca + "%')";
@@ -72,8 +72,8 @@ public class ClientesCTD {
     public static int actualizar(Cliente cl) {
         int rsu = 0;
         String sql = "UPDATE clientes SET "
-                +"nombre=?,"
-                +"dni=?,"
+                +"nombre=?, "
+                +"dni=? "
                 +"where id=?";
         try {
             ps = cn.prepareStatement(sql);
@@ -102,17 +102,17 @@ public class ClientesCTD {
     }
     public static boolean verificaCliente(String dni) {
         boolean existe = false;
-        String user = "";
+        String cli = "";
         try {
             String sql = "SELECT * FROM clientes WHERE dni = '" + dni + "'";
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                user = rs.getString(2);
+                cli = rs.getString(2);
             }
 
-            if (user.equals(dni)) {
+            if (cli.equals(dni)) {
                 existe = true;
             }
 

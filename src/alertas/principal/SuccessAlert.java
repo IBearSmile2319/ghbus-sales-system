@@ -12,12 +12,6 @@ public class SuccessAlert extends javax.swing.JDialog {
     TimerTask task;
     int i = 32;
 
-    /**
-     * Creates new form Error
-     *
-     * @param parent
-     * @param modal
-     */
     public SuccessAlert(JFrame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -186,9 +180,6 @@ public class SuccessAlert extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_materialButton1KeyTyped
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
