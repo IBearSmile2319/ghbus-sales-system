@@ -240,7 +240,7 @@ public class ModalCientes extends javax.swing.JDialog {
                     if(clien.getNombre()!=null){
                         ErrorAlert er = new ErrorAlert(new JFrame(), true);
                         er.titulo.setText("OOPS...");
-                        er.msj.setText("EL NOMBRE DE USUARIO");
+                        er.msj.setText("EL DNI DEL CLIENTE");
                         er.msj1.setText("YA ÉXISTE");
                         er.setVisible(true);
                     } else {

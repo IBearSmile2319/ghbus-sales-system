@@ -106,18 +106,19 @@ public class ModalCorteDia extends javax.swing.JDialog {
     
     /*CLIENTE GET AND POST*/
     public void guardar_cliente_boleto(){
-            cl.setNombre(lblpasajero.getText().toUpperCase());
-            cl.setDni(lbldni.getText());
-            clctd.Registrar_cliente(cl);
+            
     }
     public void G_V_cliente_boleto(){
         String dni=lbldni.getText();
         Cliente clien=clctd.verificarCli(dni);
-        if(clien.getNombre()!=null){
-            guardar_cliente_boleto();            
+        if(clien.getDni()!=null){
+            System.out.println("Ya existe el cliente");       
         }else{
-            System.out.println("Ya existe el cliente");
+            cl.setNombre(lblpasajero.getText().toUpperCase());
+            cl.setDni(lbldni.getText());
+            clctd.Registrar_cliente(cl);
         }
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -692,7 +693,7 @@ public class ModalCorteDia extends javax.swing.JDialog {
             
             /*comienzo del pdf*/
             FileOutputStream archivo;
-            File file=new File("src/pdf/boleto_"+id+".pdf");
+            File file=new File("GHBUS/RECIBOS/boleto_"+id+".pdf");
             archivo= new FileOutputStream(file);
             Document doc= new Document();
                 PdfWriter.getInstance(doc,archivo);

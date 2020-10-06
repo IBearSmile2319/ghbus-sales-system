@@ -446,9 +446,9 @@ public class Productos extends javax.swing.JInternalFrame {
             FileOutputStream archivo;
             File file;
             if(!"".equals(fechabusqueda)){
-                file=new File("src/REPORTES/ReporteEncomiendas"+fechabusqueda+"_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
+                file=new File("GHBUS/REPORTES/ReporteEncomiendas"+fechabusqueda+"_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
             }else{
-                file=new File("src/REPORTES/ReporteTodo_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
+                file=new File("GHBUS/REPORTES/ReporteTodo_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
             }
             
             archivo= new FileOutputStream(file);
