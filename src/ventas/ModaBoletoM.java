@@ -195,7 +195,7 @@ public class ModaBoletoM extends javax.swing.JDialog {
         timer.schedule(task, 0, 2);
     }//GEN-LAST:event_cerrarActionPerformed
     public void post_ventas(){
-        gn.setVenta_b_e("Encomiendas");
+        gn.setVenta_b_e("Boletos");
         gn.setValordeldia(Double.parseDouble(txtPrecioTotal.getText()));
         gn.setPorcentaje(Integer.parseInt(porcentaje.getText()));
         gn.setGanancias(Double.parseDouble(TotalGananciasDelDia.getText()));

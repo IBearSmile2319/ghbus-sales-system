@@ -200,7 +200,7 @@ public class PrincipalAdministrador extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(58, 159, 171));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("MAICOL & ACHIN");
+        jLabel5.setText("MAICOL & ACHING");
 
         btnUsuarios.setBackground(new java.awt.Color(58, 159, 171));
         btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));

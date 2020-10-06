@@ -353,7 +353,7 @@
                   <Color blue="ab" green="9f" red="3a" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="MAICOL &amp; ACHIN"/>
+                <Property name="text" type="java.lang.String" value="MAICOL &amp; ACHING"/>
               </Properties>
             </Component>
             <Component class="principal.MaterialButtomRectangle" name="btnUsuarios">
