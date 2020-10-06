@@ -448,9 +448,8 @@ public class Productos extends javax.swing.JInternalFrame {
             if(!"".equals(fechabusqueda)){
                 file=new File("GHBUS/REPORTES/ReporteEncomiendas"+fechabusqueda+"_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
             }else{
-                file=new File("GHBUS/REPORTES/ReporteTodo_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
-            }
-            
+                file=new File("GHBUS/REPORTES/ReporteTodoEncomiendas_"+new SimpleDateFormat("d-MM-yyyy").format(date)+".pdf");
+            }   
             archivo= new FileOutputStream(file);
             Document doc= new Document();
                 PdfWriter.getInstance(doc,archivo);

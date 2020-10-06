@@ -190,11 +190,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(58, 159, 171));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("IBEARSMILE_");
+        jLabel5.setText("MAICOL & ACHIN");
 
         btnAbout.setBackground(new java.awt.Color(58, 159, 171));
         btnAbout.setForeground(new java.awt.Color(255, 255, 255));
-        btnAbout.setText("ACERCA DE");
+        btnAbout.setText("GANANCIAS");
         btnAbout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAbout.setFont(new java.awt.Font("Roboto Medium", 1, 18)); // NOI18N
         btnAbout.addActionListener(new java.awt.event.ActionListener() {
