@@ -52,7 +52,6 @@ public class ModaBoletoM extends javax.swing.JDialog {
         porcentaje = new app.bolivia.swing.JCTextField();
         jPanel3 = new javax.swing.JPanel();
         registrar = new principal.MaterialButton();
-        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -164,12 +163,6 @@ public class ModaBoletoM extends javax.swing.JDialog {
             }
         });
         jPanel3.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 170, 50));
-
-        id.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        id.setForeground(new java.awt.Color(255, 255, 255));
-        id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        id.setText("id");
-        jPanel3.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, -1));
 
         panel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 340, 459, 200));
 
@@ -325,7 +318,6 @@ public class ModaBoletoM extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static app.bolivia.swing.JCTextField TotalGananciasDelDia;
     private principal.MaterialButton cerrar;
-    public static javax.swing.JLabel id;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
