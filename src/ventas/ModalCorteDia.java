@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static ventas.ListarBoletos.buscar;
+import static ventas.ListarBoletos.lblTotal;
+import static ventas.ListarBoletos.tabla;
 public class ModalCorteDia extends javax.swing.JDialog {
     Numero_a_Letra nl=new Numero_a_Letra();
     /*BOLETO*/
@@ -146,8 +148,6 @@ public class ModalCorteDia extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         lblprecio_total = new javax.swing.JLabel();
-        btnGuardarSoloCliente = new principal.MaterialButton();
-        btnLimpiar = new principal.MaterialButton();
         btnimprimir = new principal.MaterialButton();
         registrar = new principal.MaterialButton();
 
@@ -390,30 +390,6 @@ public class ModalCorteDia extends javax.swing.JDialog {
 
         panel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 240, 40));
 
-        btnGuardarSoloCliente.setBackground(new java.awt.Color(58, 159, 171));
-        btnGuardarSoloCliente.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardarSoloCliente.setText("GSC");
-        btnGuardarSoloCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnGuardarSoloCliente.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        btnGuardarSoloCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarSoloClienteActionPerformed(evt);
-            }
-        });
-        panel3.add(btnGuardarSoloCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 310, 100, 47));
-
-        btnLimpiar.setBackground(new java.awt.Color(58, 159, 171));
-        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        btnLimpiar.setText("limpiar");
-        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnLimpiar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
-            }
-        });
-        panel3.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 168, 47));
-
         btnimprimir.setBackground(new java.awt.Color(58, 159, 171));
         btnimprimir.setForeground(new java.awt.Color(255, 255, 255));
         btnimprimir.setText("imprimir");
@@ -424,7 +400,7 @@ public class ModalCorteDia extends javax.swing.JDialog {
                 btnimprimirActionPerformed(evt);
             }
         });
-        panel3.add(btnimprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 310, 168, 47));
+        panel3.add(btnimprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 168, 47));
 
         registrar.setBackground(new java.awt.Color(58, 159, 171));
         registrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -497,25 +473,6 @@ public class ModalCorteDia extends javax.swing.JDialog {
         lblprecio_total.setText(lblvalor_venta.getText());
     }//GEN-LAST:event_lblvalor_ventaKeyReleased
 
-    private void btnGuardarSoloClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarSoloClienteActionPerformed
-        if(!"".equals(lbldni.getText()) || !"".equals(lblpasajero.getText())){
-            G_V_cliente_boleto();
-            
-            SuccessAlert sa = new SuccessAlert(new JFrame(), true);
-            sa.titulo.setText("¡HECHO!");
-            sa.msj.setText("SE HA REGISTRADO UN");
-            sa.msj1.setText("NUEVO PASAJERO");
-            sa.setVisible(true);
-        }else{
-            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("EL CAMPO DNI O PASAJERO");
-            er.msj1.setText("ESTAN VACIOS");
-            er.setVisible(true);
-        }
-        
-    }//GEN-LAST:event_btnGuardarSoloClienteActionPerformed
-
     private void lbldniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbldniKeyPressed
         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
             if(!"".equals(lbldni.getText())){
@@ -545,16 +502,19 @@ public class ModalCorteDia extends javax.swing.JDialog {
                     sa.msj.setText("SE HA MODIFICADO");
                     sa.msj1.setText("UN PASAJERO");
                     sa.setVisible(true);
+                totalpagar();
             }else{
                 guardar_modificar_boleto();
                 G_V_cliente_boleto();
                 blctd.listarBoletos("");
+                
                 SuccessAlert sa = new SuccessAlert(new JFrame(), true);
                 sa.titulo.setText("¡HECHO!");
                 sa.msj.setText("SE HA REGISTRADO UN");
                 sa.msj1.setText("NUEVO PASAJERO");
                 sa.setVisible(true);
                 pdfRecibo();
+                totalpagar();
             }
             
         }else{
@@ -565,10 +525,6 @@ public class ModalCorteDia extends javax.swing.JDialog {
             er.setVisible(true);
         }
     }//GEN-LAST:event_registrarActionPerformed
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        
-    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnimprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnimprimirActionPerformed
         
@@ -625,8 +581,6 @@ public class ModalCorteDia extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public com.toedter.calendar.JDateChooser CFV;
-    private principal.MaterialButton btnGuardarSoloCliente;
-    private principal.MaterialButton btnLimpiar;
     private principal.MaterialButton btnimprimir;
     private principal.MaterialButton cerrar;
     private javax.swing.JLabel jLabel2;
@@ -651,7 +605,16 @@ public class ModalCorteDia extends javax.swing.JDialog {
     public static principal.MaterialButton registrar;
     public static javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
-
+    double totalpagar=0;
+    private void totalpagar(){
+        totalpagar=0.00;
+        int numfila=tabla.getRowCount();
+        for (int i = 0; i < numfila; i++) {
+            double cal=Double.parseDouble(String.valueOf(tabla.getModel().getValueAt(i,10)));
+            totalpagar=totalpagar+cal;
+        }
+        lblTotal.setText(String.valueOf(totalpagar));
+    }
     private void Cerrar() {
         this.dispose();
         timer = null;

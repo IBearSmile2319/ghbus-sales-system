@@ -259,7 +259,7 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
         buscar.setBorder(null);
         buscar.setForeground(new java.awt.Color(58, 159, 171));
         buscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        buscar.setPlaceholder("BUSCAR");
+        buscar.setPlaceholder("Fech. Viaje");
         buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscarKeyReleased(evt);
@@ -318,7 +318,7 @@ public class ListarBoletos extends javax.swing.JInternalFrame {
         buscarfexpedicion.setBorder(null);
         buscarfexpedicion.setForeground(new java.awt.Color(58, 159, 171));
         buscarfexpedicion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        buscarfexpedicion.setPlaceholder("FECH. EXPEDICION");
+        buscarfexpedicion.setPlaceholder("Fech. Compra");
         buscarfexpedicion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 buscarfexpedicionKeyReleased(evt);

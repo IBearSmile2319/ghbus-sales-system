@@ -884,10 +884,10 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 doc.open();
 //                Image img= Image.getInstance("/src/imgenes/logo.png");
                 Paragraph fecha= new Paragraph();
-                Font negrita= new Font(Font.FontFamily.TIMES_ROMAN,11,Font.BOLD,BaseColor.BLUE);
+                Font negrita= new Font(Font.FontFamily.TIMES_ROMAN,7,Font.BOLD,BaseColor.BLUE);
                 fecha.add(Chunk.NEWLINE);
                 
-                fecha.add("FACTURA: \n"+"FECHA: "+new SimpleDateFormat("d/MM/yyyy").format(date)+"\n\n");
+                fecha.add("FACTURA:"+id+"\n"+"FECHA: "+new SimpleDateFormat("d/MM/yyyy").format(date)+"\n\n");
                 PdfPTable Encabezado=new PdfPTable(3);
                 Encabezado.setWidthPercentage(100);
                 Encabezado.getDefaultCell().setBorder(0);
@@ -904,10 +904,6 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 Encabezado.addCell(fecha);
                 doc.add(Encabezado);
                 /*FIN DE ENCABEZADO*/
-                Paragraph bole=new Paragraph();
-                bole.add(Chunk.NEWLINE);
-                bole.add("\n\n");
-                doc.add(bole);
                 /*-----CUADRO1-------*/
                 PdfPTable fila1=new PdfPTable(3);
                 fila1.setWidthPercentage(100);
@@ -915,9 +911,9 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 float[] ColumnaFila1=new float[]{80f,80F,80f};
                 fila1.setWidths(ColumnaFila1);
                 fila1.setHorizontalAlignment(Element.ALIGN_CENTER);
-                fila1.addCell("\nDESTINO: "+txtDe.getText().toUpperCase());
-                fila1.addCell("\nA: "+txtA.getText().toUpperCase()+"\n\n");
-                fila1.addCell("\nFECHA: "+new SimpleDateFormat("dd/MMM").format(date).toUpperCase()+"\n\n");
+                fila1.addCell("DESTINO: "+txtDe.getText().toUpperCase());
+                fila1.addCell("A: "+txtA.getText().toUpperCase()+"");
+                fila1.addCell("FECHA: "+new SimpleDateFormat("dd/MMM").format(date).toUpperCase()+"");
                 doc.add(fila1);
                 /*-----CUADRO2-------*/
                 PdfPTable fila2=new PdfPTable(3);
@@ -926,9 +922,9 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 float[] ColumnaFila2=new float[]{70f,30,50f};
                 fila2.setWidths(ColumnaFila2);
                 fila2.setHorizontalAlignment(Element.ALIGN_CENTER);
-                fila2.addCell("\n\n"+"REMITENTE: "+txtRemitente.getText().toUpperCase()+"\n\n");
-                fila2.addCell("\n\n"+"DNI: "+txtDniRemitente.getText()+"\n\n");
-                fila2.addCell("\n\n"+"CELULAR: "+txtCelularRemitente.getText()+"\n\n");
+                fila2.addCell(""+"REMITENTE: "+txtRemitente.getText().toUpperCase()+"\n");
+                fila2.addCell(""+"DNI: "+txtDniRemitente.getText()+"\n");
+                fila2.addCell(""+"CELULAR: "+txtCelularRemitente.getText()+"\n");
                 doc.add(fila2);
                 /*remitente*/
                 PdfPTable filaruc=new PdfPTable(1);
@@ -937,7 +933,7 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 float[] ColumnaFilaruc=new float[]{100f};
                 filaruc.setWidths(ColumnaFilaruc);
                 filaruc.setHorizontalAlignment(Element.ALIGN_CENTER);
-                filaruc.addCell("\n"+"RUC DEL REMITENTE: "+txtRucRemitente.getText());
+                filaruc.addCell(""+"RUC DEL REMITENTE: "+txtRucRemitente.getText());
                 doc.add(filaruc);
                 /*-----CUADRO3-------*/
                 PdfPTable fila3=new PdfPTable(3);
@@ -946,9 +942,9 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 float[] ColumnaFila3=new float[]{70f,30f,50f};
                 fila3.setWidths(ColumnaFila3);
                 fila3.setHorizontalAlignment(Element.ALIGN_CENTER);
-                fila3.addCell("\nBENEFICIARIO: "+txtBeneficiario.getText().toUpperCase()+"\n\n");
-                fila3.addCell("\nDNI: "+txtDniBeneficiario.getText()+"\n\n");
-                fila3.addCell("\nCELULAR: "+txtCelularBeneficiario.getText()+"\n\n");
+                fila3.addCell("BENEFICIARIO: "+txtBeneficiario.getText().toUpperCase()+"\n");
+                fila3.addCell("DNI: "+txtDniBeneficiario.getText()+"\n");
+                fila3.addCell("CELULAR: "+txtCelularBeneficiario.getText()+"\n");
                 doc.add(fila3);
                 /*direccion*/
                 PdfPTable filadire=new PdfPTable(1);
@@ -969,10 +965,10 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 filacorreo.addCell("CORREO: "+txtCorreoEnvios.getText().toUpperCase());
                 doc.add(filacorreo);
                 /*separador*/
-                Paragraph sepa=new Paragraph();
-                sepa.add(Chunk.NEWLINE);
-                sepa.add("\n\n");
-                doc.add(sepa);
+//                Paragraph sepa=new Paragraph();
+//                sepa.add(Chunk.NEWLINE);
+//                sepa.add("\n\n");
+//                doc.add(sepa);
                 /*cuadro*/
                 /*-----CUADRO1-------*/
                 PdfPTable tablaenvio=new PdfPTable(4);
@@ -981,10 +977,10 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 float[] Columnatablaenvio=new float[]{25f,25f,25f,25f};
                 tablaenvio.setWidths(Columnatablaenvio);
                 tablaenvio.setHorizontalAlignment(Element.ALIGN_CENTER);
-                PdfPCell envio1=new PdfPCell(new Phrase("\n\nCANTIDAD.\n\n"));
-                PdfPCell envio2=new PdfPCell(new Phrase("\n\nDICE CONTENER.\n\n"));
-                PdfPCell envio3=new PdfPCell(new Phrase("\n\nPRECIO UNIT.\n\n"));
-                PdfPCell envio4=new PdfPCell(new Phrase("\n\nIMPORTE\n\n"));
+                PdfPCell envio1=new PdfPCell(new Phrase("CANTIDAD."));
+                PdfPCell envio2=new PdfPCell(new Phrase("DICE CONTENER."));
+                PdfPCell envio3=new PdfPCell(new Phrase("PRECIO UNIT."));
+                PdfPCell envio4=new PdfPCell(new Phrase("IMPORTE"));
                 envio1.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
                 envio2.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
                 envio3.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
@@ -998,10 +994,10 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                     String contenido=JTBLEncomiendas.getValueAt(i, 1).toString();
                     String precio=JTBLEncomiendas.getValueAt(i, 2).toString();
                     String importe=JTBLEncomiendas.getValueAt(i, 3).toString();
-                        tablaenvio.addCell("\n"+cantidad+"\n");
-                        tablaenvio.addCell("\n"+contenido+"\n");
-                        tablaenvio.addCell("\n"+precio+"\n");
-                        tablaenvio.addCell("\n"+importe+"\n");
+                        tablaenvio.addCell(""+cantidad+"");
+                        tablaenvio.addCell(""+contenido+"");
+                        tablaenvio.addCell(""+precio+"");
+                        tablaenvio.addCell(""+importe+"");
                         
                 }
                 doc.add(tablaenvio);
@@ -1065,6 +1061,190 @@ public class ListarEnvios extends javax.swing.JInternalFrame {
                 fila13.addCell("");
                 doc.add(fila13);
                 /**/
+                /*separador*/
+                Paragraph sepa=new Paragraph();
+                sepa.add(Chunk.NEWLINE);
+                sepa.add("\n");
+                doc.add(sepa);
+                /*cuadro*/
+//               otro cuadro
+                PdfPTable Encabezado2=new PdfPTable(3);
+                Encabezado2.setWidthPercentage(100);
+                Encabezado2.getDefaultCell().setBorder(0);
+                float[] ColumnaEncabezado2=new float[]{140f,10f,60f};
+                Encabezado2.setWidths(ColumnaEncabezado2);
+                Encabezado2.setHorizontalAlignment(Element.ALIGN_LEFT);
+                if(id<=9){
+                    Encabezado2.addCell("RECIBO: N°00"+id+"\nGHBUS EMPRESA DE TRANSPORTES GRUPO HORNA\nPARA TRANSPORTE DE CARGA Y ENCOMIENDA.");
+                }else{
+                    Encabezado2.addCell("RECIBO: N°0"+id+"\nGHBUS EMPRESA DE TRANSPORTES GRUPO HORNA\nPARA TRANSPORTE DE CARGA Y ENCOMIENDA.");
+                }
+                
+                Encabezado2.addCell("");
+                Encabezado2.addCell(fecha);
+                doc.add(Encabezado2);
+                /*FIN DE ENCABEZADO*/
+                /*-----CUADRO1-------*/
+                PdfPTable fila111=new PdfPTable(3);
+                fila111.setWidthPercentage(100);
+                fila111.getDefaultCell().setBorder(0);
+                float[] ColumnaFila111=new float[]{80f,80F,80f};
+                fila111.setWidths(ColumnaFila111);
+                fila111.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila111.addCell("DESTINO: "+txtDe.getText().toUpperCase());
+                fila111.addCell("A: "+txtA.getText().toUpperCase()+"");
+                fila111.addCell("FECHA: "+new SimpleDateFormat("dd/MMM").format(date).toUpperCase()+"");
+                doc.add(fila111);
+                /*-----CUADRO2-------*/
+                PdfPTable fila211=new PdfPTable(3);
+                fila211.setWidthPercentage(100);
+                fila211.getDefaultCell().setBorder(0);
+                float[] ColumnaFila211=new float[]{70f,30,50f};
+                fila211.setWidths(ColumnaFila211);
+                fila211.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila211.addCell(""+"REMITENTE: "+txtRemitente.getText().toUpperCase()+"\n");
+                fila211.addCell(""+"DNI: "+txtDniRemitente.getText()+"\n");
+                fila211.addCell(""+"CELULAR: "+txtCelularRemitente.getText()+"\n");
+                doc.add(fila211);
+                /*remitente*/
+                PdfPTable filaruc2=new PdfPTable(1);
+                filaruc2.setWidthPercentage(100);
+                filaruc2.getDefaultCell().setBorder(0);
+                float[] ColumnaFilaruc2=new float[]{100f};
+                filaruc2.setWidths(ColumnaFilaruc2);
+                filaruc2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                filaruc2.addCell(""+"RUC DEL REMITENTE: "+txtRucRemitente.getText());
+                doc.add(filaruc2);
+                /*-----CUADRO3-------*/
+                PdfPTable fila32=new PdfPTable(3);
+                fila32.setWidthPercentage(100);
+                fila32.getDefaultCell().setBorder(0);
+                float[] ColumnaFila32=new float[]{70f,30f,50f};
+                fila32.setWidths(ColumnaFila32);
+                fila32.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila32.addCell("\nBENEFICIARIO: "+txtBeneficiario.getText().toUpperCase()+"\n");
+                fila32.addCell("\nDNI: "+txtDniBeneficiario.getText()+"\n");
+                fila32.addCell("\nCELULAR: "+txtCelularBeneficiario.getText()+"\n");
+                doc.add(fila32);
+                /*direccion*/
+                PdfPTable filadire2=new PdfPTable(1);
+                filadire2.setWidthPercentage(100);
+                filadire2.getDefaultCell().setBorder(0);
+                float[] ColumnaFiladire2=new float[]{100f};
+                filadire2.setWidths(ColumnaFiladire2);
+                filadire2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                filadire2.addCell("DIRECCION: "+txtDireccionBeneficiario.getText().toUpperCase());
+                doc.add(filadire2);
+                /*correo*/
+                PdfPTable filacorreo2=new PdfPTable(1);
+                filacorreo2.setWidthPercentage(100);
+                filacorreo2.getDefaultCell().setBorder(0);
+                float[] ColumnaFilacorreo2=new float[]{100f};
+                filacorreo2.setWidths(ColumnaFilacorreo2);
+                filacorreo2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                filacorreo2.addCell("CORREO: "+txtCorreoEnvios.getText().toUpperCase());
+                doc.add(filacorreo2);
+                /*separador*/
+//                Paragraph sepa=new Paragraph();
+//                sepa.add(Chunk.NEWLINE);
+//                sepa.add("\n\n");
+//                doc.add(sepa);
+                /*cuadro*/
+                /*-----CUADRO1-------*/
+                PdfPTable tablaenvio2=new PdfPTable(4);
+                tablaenvio2.setWidthPercentage(100);
+                tablaenvio2.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] Columnatablaenvio2=new float[]{25f,25f,25f,25f};
+                tablaenvio2.setWidths(Columnatablaenvio2);
+                tablaenvio2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                PdfPCell envio12=new PdfPCell(new Phrase("CANTIDAD."));
+                PdfPCell envio22=new PdfPCell(new Phrase("DICE CONTENER."));
+                PdfPCell envio32=new PdfPCell(new Phrase("PRECIO UNIT."));
+                PdfPCell envio42=new PdfPCell(new Phrase("IMPORTE"));
+                envio12.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                envio22.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                envio32.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                envio42.setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                tablaenvio2.addCell(envio12);
+                tablaenvio2.addCell(envio22);
+                tablaenvio2.addCell(envio32);
+                tablaenvio2.addCell(envio42);
+                for (int i = 0; i < JTBLEncomiendas.getRowCount(); i++) {
+                    String cantidad=JTBLEncomiendas.getValueAt(i, 0).toString();
+                    String contenido=JTBLEncomiendas.getValueAt(i, 1).toString();
+                    String importe=JTBLEncomiendas.getValueAt(i, 3).toString();
+                        tablaenvio2.addCell(""+cantidad+"");
+                        tablaenvio2.addCell(""+contenido+"");
+                        tablaenvio2.addCell(""+""+"");
+                        tablaenvio2.addCell(""+importe+"");
+                        
+                }
+                doc.add(tablaenvio2);
+                /*vacio*/
+                PdfPTable fila02=new PdfPTable(4);
+                fila02.setWidthPercentage(100);
+                fila02.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila02=new float[]{25f,25f,25f,25f};
+                fila02.setWidths(ColumnaFila02);
+                fila02.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila02.addCell("\n");
+                fila02.addCell("\n");
+                fila02.addCell("\n");
+                fila02.addCell("\n");
+                doc.add(fila0);
+                //tabla10
+                PdfPTable fila102=new PdfPTable(4);
+                fila102.setWidthPercentage(100);
+                fila102.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila102=new float[]{25f,25f,25f,25f};
+                fila102.setWidths(ColumnaFila102);
+                fila102.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila102.addCell("");
+                fila102.addCell(txtA.getText());
+                fila102.addCell("");
+                fila102.addCell("");
+                doc.add(fila102);
+                //tabla10
+                PdfPTable fila112=new PdfPTable(4);
+                fila112.setWidthPercentage(100);
+                fila112.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila112=new float[]{25f,25f,25f,25f};
+                fila112.setWidths(ColumnaFila112);
+                fila112.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila112.addCell("");
+                fila112.addCell("CLAVE: "+txtClaveEnvio.getText());
+                fila112.addCell("");
+                fila112.addCell("");
+                doc.add(fila112);
+                //tabla10
+                PdfPTable fila122=new PdfPTable(4);
+                fila122.setWidthPercentage(100);
+                fila122.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila122=new float[]{25f,25f,25f,25f};
+                fila122.setWidths(ColumnaFila122);
+                fila122.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila122.addCell("");
+                fila122.addCell("TOTAL: S/.");
+                fila122.addCell("");
+                fila122.addCell("");
+                doc.add(fila122);
+                //tabla10
+                PdfPTable fila132=new PdfPTable(3);
+                fila132.setWidthPercentage(100);
+                fila132.getDefaultCell().setBorder(7|Rectangle.OUT_BOTTOM| Rectangle.OUT_RIGHT);
+                float[] ColumnaFila132=new float[]{50f,25f,25f};
+                fila132.setWidths(ColumnaFila132);
+                fila132.setHorizontalAlignment(Element.ALIGN_CENTER);
+                fila132.addCell("El cliente sertifica que no envia dinero ni especies valoradas.");
+                fila132.addCell("TOTAL: S/.");
+                fila132.addCell("");
+                doc.add(fila132);
+
+
+
+
+//              ---------------------
+                
                 doc.close();
                 archivo.close();
                 Desktop.getDesktop().open(file);

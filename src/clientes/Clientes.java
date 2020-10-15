@@ -10,7 +10,6 @@ import tabla.MyScrollbarUI;
 import Modelo.Cliente;
 import Controlador.ClientesCTD;
 import alertas.principal.WarningAlertC;
-import clientes.ModalCientes;
 
 public class Clientes extends javax.swing.JInternalFrame {
     Cliente cl=new Cliente();
@@ -39,8 +38,6 @@ public class Clientes extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        nuevo = new principal.MaterialButton();
-        modificar = new principal.MaterialButton();
         eliminar = new principal.MaterialButton();
         buscar = new app.bolivia.swing.JCTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -106,28 +103,6 @@ public class Clientes extends javax.swing.JInternalFrame {
 
         jPanel7.setBackground(new java.awt.Color(58, 159, 171));
 
-        nuevo.setBackground(new java.awt.Color(255, 255, 255));
-        nuevo.setForeground(new java.awt.Color(58, 159, 171));
-        nuevo.setText("NUEVO CLIENTE");
-        nuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        nuevo.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        nuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevoActionPerformed(evt);
-            }
-        });
-
-        modificar.setBackground(new java.awt.Color(255, 255, 255));
-        modificar.setForeground(new java.awt.Color(58, 159, 171));
-        modificar.setText("MODIFICAR");
-        modificar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        modificar.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        modificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarActionPerformed(evt);
-            }
-        });
-
         eliminar.setBackground(new java.awt.Color(255, 255, 255));
         eliminar.setForeground(new java.awt.Color(58, 159, 171));
         eliminar.setText("ELIMINAR");
@@ -162,12 +137,6 @@ public class Clientes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -181,11 +150,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addContainerGap()
                 .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +206,7 @@ public class Clientes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -265,43 +230,6 @@ public class Clientes extends javax.swing.JInternalFrame {
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         this.dispose();
     }//GEN-LAST:event_cerrarActionPerformed
-
-    private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
-        ModalCientes mp = new ModalCientes(new JFrame(), true);
-        mp.titulo.setText("REGISTRAR");
-        mp.registrar.setText("REGISTRAR");
-        mp.setVisible(true);
-    }//GEN-LAST:event_nuevoActionPerformed
-
-    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        if (this.tabla.getRowCount() < 1) {
-            ErrorAlert er = new ErrorAlert(new JFrame(), true);
-            er.titulo.setText("OOPS...");
-            er.msj.setText("LA TABLA ESTA VACÍA");
-            er.msj1.setText("");
-            er.setVisible(true);
-        } else {
-            if (this.tabla.getSelectedRowCount() < 1) {
-                ErrorAlert er = new ErrorAlert(new JFrame(), true);
-                er.titulo.setText("OOPS...");
-                er.msj.setText("SELECCIONA UN");
-                er.msj1.setText("REGISTRO");
-                er.setVisible(true);
-            } else {
-
-                int fila = this.tabla.getSelectedRow();
-
-                ModalCientes mp = new ModalCientes(new JFrame(), true);
-                mp.id.setText(this.tabla.getValueAt(fila, 0).toString());
-                mp.txtnombreapellido.setText(this.tabla.getValueAt(fila, 1).toString());
-                mp.txtdni.setText(this.tabla.getValueAt(fila, 2).toString());
-                mp.titulo.setText("MODIFICAR");
-                mp.registrar.setText("GUARDAR");
-                mp.setVisible(true);
-                clctd.listarCliente("");
-            }
-        }
-    }//GEN-LAST:event_modificarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         if (this.tabla.getRowCount() < 1) {
@@ -365,8 +293,6 @@ public class Clientes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private principal.MaterialButton modificar;
-    private principal.MaterialButton nuevo;
     public static javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }
